@@ -1,0 +1,19 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "env": {
+    "NEXT_PUBLIC_SUPABASE_URL": "@supabase_url",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase_anon_key",
+    "SUPABASE_SERVICE_ROLE_KEY": "@supabase_service_role_key",
+    "NEXT_PUBLIC_APP_URL": "@app_url",
+    "RESEND_API_KEY": "@resend_api_key",
+    "RESEND_FROM_EMAIL": "@resend_from_email",
+    "RESEND_FROM_NAME": "@resend_from_name",
+    "WHATSAPP_API_URL": "@whatsapp_api_url",
+    "WHATSAPP_PHONE_NUMBER_ID": "@whatsapp_phone_number_id",
+    "WHATSAPP_ACCESS_TOKEN": "@whatsapp_access_token",
+    "WHATSAPP_BUSINESS_ID": "@whatsapp_business_id"
+  }
+}
