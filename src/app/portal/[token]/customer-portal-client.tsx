@@ -58,16 +58,16 @@ function Section({ title, icon: Icon, defaultOpen = true, children }: {
 }) {
   const [open, setOpen] = useState(defaultOpen)
   return (
-    <div className="rounded-xl border border-gray-800 bg-gray-900/50 overflow-hidden">
+    <div className="rounded-xl border border-gray-200 bg-white overflow-hidden shadow-sm">
       <button
         onClick={() => setOpen(o => !o)}
-        className="flex items-center justify-between w-full px-5 py-4 text-left hover:bg-gray-800/30 transition-colors"
+        className="flex items-center justify-between w-full px-5 py-4 text-left hover:bg-gray-50 transition-colors"
       >
         <div className="flex items-center gap-3">
-          <Icon className="w-5 h-5 text-red-400" />
+          <Icon className="w-5 h-5 text-red-600" />
           <span className="font-semibold text-gray-900">{title}</span>
         </div>
-        {open ? <ChevronUp className="w-4 h-4 text-gray-500" /> : <ChevronDown className="w-4 h-4 text-gray-500" />}
+        {open ? <ChevronUp className="w-4 h-4 text-gray-400" /> : <ChevronDown className="w-4 h-4 text-gray-400" />}
       </button>
       {open && <div className="px-5 pb-5">{children}</div>}
     </div>
@@ -199,34 +199,34 @@ export default function CustomerPortalClient({ token }: { token: string }) {
   const outstanding = po.po_value - totalApproved
 
   return (
-    <div className="min-h-screen bg-[#0d0405]">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-gradient-to-r from-red-950 to-[#0d0405] border-b border-red-950 px-4 py-5">
+      <header className="bg-white border-b border-gray-200 shadow-sm px-4 py-5">
         <div className="max-w-2xl mx-auto">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center">
-              <Flame className="w-5 h-5 text-gray-900" />
+              <Flame className="w-5 h-5 text-white" />
             </div>
             <div>
               <p className="text-sm font-bold text-gray-900">Notofire</p>
-              <p className="text-xs text-gray-400">Customer Portal</p>
+              <p className="text-xs text-gray-500">Customer Portal</p>
             </div>
           </div>
           <h1 className="text-xl font-bold text-gray-900">PO: {po.po_number}</h1>
-          <p className="text-gray-400 text-sm mt-0.5">{po.customer_name}</p>
+          <p className="text-gray-500 text-sm mt-0.5">{po.customer_name}</p>
           <div className="flex items-center gap-3 mt-3 flex-wrap">
             <StatusPill status={po.status} />
-            <span className="text-sm text-gray-400">Value: <span className="text-gray-900 font-semibold">{formatCurrency(po.po_value)}</span></span>
+            <span className="text-sm text-gray-500">Value: <span className="text-gray-900 font-semibold">{formatCurrency(po.po_value)}</span></span>
           </div>
         </div>
       </header>
 
       <div className="max-w-2xl mx-auto px-4 py-6 space-y-4">
         {/* Progress Tracker */}
-        <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-5">
-          <h2 className="text-sm font-semibold text-gray-400 mb-4">ORDER PROGRESS</h2>
+        <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-5">
+          <h2 className="text-sm font-semibold text-gray-500 mb-4 uppercase tracking-wider">Order Progress</h2>
           <div className="flex items-center justify-between relative">
-            <div className="absolute top-4 left-0 right-0 h-0.5 bg-gray-800 z-0" />
+            <div className="absolute top-4 left-0 right-0 h-0.5 bg-gray-200 z-0" />
             <div
               className="absolute top-4 left-0 h-0.5 bg-red-500 z-0 transition-all duration-700"
               style={{ width: `${Math.max(0, Math.min(100, ((currentStepIdx - 1) / (PORTAL_STEPS.length - 1)) * 100))}%` }}
@@ -237,10 +237,10 @@ export default function CustomerPortalClient({ token }: { token: string }) {
               const current = STATUS_ORDER.indexOf(po.status) === stepStatus
               return (
                 <div key={step.key} className="flex flex-col items-center z-10 flex-1">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all ${done ? 'bg-red-600 border-red-500 shadow-lg shadow-red-500/30' : 'bg-[#150a0a] border-red-900/50'} ${current ? 'ring-2 ring-red-400 ring-offset-2 ring-offset-[#0d0405]' : ''}`}>
-                    {done ? <CheckCircle2 className="w-4 h-4 text-gray-900" /> : <Circle className="w-4 h-4 text-gray-600" />}
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all ${done ? 'bg-red-600 border-red-500 shadow-lg shadow-red-500/30' : 'bg-gray-100 border-gray-300'} ${current ? 'ring-2 ring-red-400 ring-offset-2 ring-offset-gray-50' : ''}`}>
+                    {done ? <CheckCircle2 className="w-4 h-4 text-white" /> : <Circle className="w-4 h-4 text-gray-400" />}
                   </div>
-                  <p className={`text-xs mt-2 text-center font-medium ${done ? 'text-red-300' : 'text-gray-600'}`}>{step.label}</p>
+                  <p className={`text-xs mt-2 text-center font-medium ${done ? 'text-red-600' : 'text-gray-400'}`}>{step.label}</p>
                 </div>
               )
             })}
@@ -249,12 +249,12 @@ export default function CustomerPortalClient({ token }: { token: string }) {
 
         {/* Payment Alert */}
         {pendingPayment && (
-          <div className="rounded-xl border border-amber-700/50 bg-amber-900/20 p-5">
+          <div className="rounded-xl border border-amber-200 bg-amber-50 p-5">
             <div className="flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+              <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
               <div className="flex-1">
-                <p className="font-semibold text-amber-300">Payment Required</p>
-                <p className="text-sm text-amber-200/70 mt-1">
+                <p className="font-semibold text-amber-800">Payment Required</p>
+                <p className="text-sm text-amber-700 mt-1">
                   {PAYMENT_TYPE_LABELS[pendingPayment.payment_type]} payment of{' '}
                   <strong>{formatCurrency(pendingPayment.amount_requested)}</strong> due by{' '}
                   {formatDate(pendingPayment.due_date)}
@@ -262,14 +262,14 @@ export default function CustomerPortalClient({ token }: { token: string }) {
                 {pendingPayment.upi_link && (
                   <a
                     href={pendingPayment.upi_link}
-                    className="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-green-400 bg-green-900/30 border border-green-700/50 px-3 py-1.5 rounded-lg hover:bg-green-900/50 transition-colors"
+                    className="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-green-700 bg-green-50 border border-green-200 px-3 py-1.5 rounded-lg hover:bg-green-100 transition-colors"
                   >
                     <CreditCard className="w-4 h-4" /> Pay via UPI
                   </a>
                 )}
                 <button
                   onClick={() => setSelectedPayment(pendingPayment)}
-                  className="mt-3 ml-3 text-sm font-medium text-red-400 hover:text-red-300 underline"
+                  className="mt-3 ml-3 text-sm font-medium text-red-600 hover:text-red-700 underline"
                 >
                   Upload payment proof →
                 </button>
@@ -313,13 +313,13 @@ export default function CustomerPortalClient({ token }: { token: string }) {
         {pi && pi.length > 0 && (
           <Section title="Proforma Invoice" icon={FileText}>
             {pi.map(invoice => (
-              <div key={invoice.id} className="bg-gray-800/50 rounded-lg p-4 mt-2">
+              <div key={invoice.id} className="bg-gray-50 rounded-lg p-4 mt-2 border border-gray-100">
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="font-semibold text-gray-900">{invoice.pi_number}</p>
-                    <p className="text-sm text-gray-400">{formatDate(invoice.pi_date)}</p>
+                    <p className="text-sm text-gray-500">{formatDate(invoice.pi_date)}</p>
                   </div>
-                  <p className="text-xl font-bold text-red-400">{formatCurrency(invoice.pi_amount)}</p>
+                  <p className="text-xl font-bold text-red-600">{formatCurrency(invoice.pi_amount)}</p>
                 </div>
               </div>
             ))}
@@ -330,26 +330,26 @@ export default function CustomerPortalClient({ token }: { token: string }) {
         {payments && payments.length > 0 && (
           <Section title="Payment History" icon={CreditCard}>
             <div className="space-y-3 mt-2">
-              <div className="grid grid-cols-2 gap-3 text-sm p-3 rounded-lg bg-gray-800/50">
+              <div className="grid grid-cols-2 gap-3 text-sm p-3 rounded-lg bg-gray-50 border border-gray-100">
                 <div>
                   <p className="text-gray-500">Total PO Value</p>
                   <p className="font-bold text-gray-900">{formatCurrency(po.po_value)}</p>
                 </div>
                 <div>
                   <p className="text-gray-500">Amount Paid</p>
-                  <p className="font-bold text-green-400">{formatCurrency(totalApproved)}</p>
+                  <p className="font-bold text-green-600">{formatCurrency(totalApproved)}</p>
                 </div>
                 <div className="col-span-2">
                   <p className="text-gray-500">Outstanding Balance</p>
-                  <p className={`font-bold ${outstanding > 0 ? 'text-amber-400' : 'text-green-400'}`}>{formatCurrency(outstanding)}</p>
+                  <p className={`font-bold ${outstanding > 0 ? 'text-amber-600' : 'text-green-600'}`}>{formatCurrency(outstanding)}</p>
                 </div>
               </div>
               {payments.map(payment => (
-                <div key={payment.id} className="flex items-center justify-between p-3 rounded-lg border border-gray-800">
+                <div key={payment.id} className="flex items-center justify-between p-3 rounded-lg border border-gray-200">
                   <div>
                     <p className="font-medium text-gray-900">{formatCurrency(payment.amount_requested)}</p>
                     <p className="text-xs text-gray-500 capitalize">{payment.payment_type} · Due {formatDate(payment.due_date)}</p>
-                    {payment.utr_number && <p className="text-xs font-mono text-red-400">UTR: {payment.utr_number}</p>}
+                    {payment.utr_number && <p className="text-xs font-mono text-red-600">UTR: {payment.utr_number}</p>}
                   </div>
                   <PaymentStatusChip status={payment.status} />
                 </div>
@@ -365,15 +365,15 @@ export default function CustomerPortalClient({ token }: { token: string }) {
               {production.map((update, i) => (
                 <div key={update.id} className="flex gap-3">
                   <div className="flex flex-col items-center">
-                    <div className="w-7 h-7 rounded-full bg-red-900/50 border border-red-700 flex items-center justify-center flex-shrink-0">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-red-400" />
+                    <div className="w-7 h-7 rounded-full bg-red-50 border border-red-200 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-red-600" />
                     </div>
-                    {i < production.length - 1 && <div className="w-0.5 bg-gray-700 flex-1 mt-1 mb-1" />}
+                    {i < production.length - 1 && <div className="w-0.5 bg-gray-200 flex-1 mt-1 mb-1" />}
                   </div>
                   <div className="pb-3">
                     <p className="font-medium text-gray-900 text-sm">{PRODUCTION_STATUS_LABELS[update.status as ProductionStatus] ?? update.status}</p>
-                    {update.notes && <p className="text-xs text-gray-400">{update.notes}</p>}
-                    <p className="text-xs text-gray-600 mt-0.5">{formatDateTime(update.created_at)}</p>
+                    {update.notes && <p className="text-xs text-gray-500">{update.notes}</p>}
+                    <p className="text-xs text-gray-400 mt-0.5">{formatDateTime(update.created_at)}</p>
                   </div>
                 </div>
               ))}
@@ -385,9 +385,9 @@ export default function CustomerPortalClient({ token }: { token: string }) {
         {inspection && (
           <Section title="Inspection" icon={CheckCircle2} defaultOpen={false}>
             <div className="mt-2 grid grid-cols-2 gap-3 text-sm">
-              <div><span className="text-gray-500">Date:</span> <span className="text-gray-200">{formatDate(inspection.inspection_date)}</span></div>
-              <div><span className="text-gray-500">Inspector:</span> <span className="text-gray-200">{inspection.inspector_name ?? '—'}</span></div>
-              <div><span className="text-gray-500">Result:</span> <span className={`font-medium ${inspection.result === 'passed' ? 'text-green-400' : inspection.result === 'failed' ? 'text-red-400' : 'text-gray-200'}`}>{inspection.result ?? '—'}</span></div>
+              <div><span className="text-gray-500">Date:</span> <span className="text-gray-800">{formatDate(inspection.inspection_date)}</span></div>
+              <div><span className="text-gray-500">Inspector:</span> <span className="text-gray-800">{inspection.inspector_name ?? '—'}</span></div>
+              <div><span className="text-gray-500">Result:</span> <span className={`font-medium ${inspection.result === 'passed' ? 'text-green-600' : inspection.result === 'failed' ? 'text-red-600' : 'text-gray-700'}`}>{inspection.result ?? '—'}</span></div>
             </div>
           </Section>
         )}
@@ -396,9 +396,9 @@ export default function CustomerPortalClient({ token }: { token: string }) {
         {dispatch && (
           <Section title="Dispatch Information" icon={Truck} defaultOpen={false}>
             <div className="mt-2 grid grid-cols-2 gap-3 text-sm">
-              <div><span className="text-gray-500">Transporter:</span> <span className="text-gray-200">{dispatch.transporter}</span></div>
-              <div><span className="text-gray-500">Vehicle:</span> <span className="text-gray-200 font-mono">{dispatch.vehicle_number}</span></div>
-              <div><span className="text-gray-500">Date:</span> <span className="text-gray-200">{formatDate(dispatch.dispatch_date)}</span></div>
+              <div><span className="text-gray-500">Transporter:</span> <span className="text-gray-800">{dispatch.transporter}</span></div>
+              <div><span className="text-gray-500">Vehicle:</span> <span className="text-gray-800 font-mono">{dispatch.vehicle_number}</span></div>
+              <div><span className="text-gray-500">Date:</span> <span className="text-gray-800">{formatDate(dispatch.dispatch_date)}</span></div>
             </div>
           </Section>
         )}
@@ -407,11 +407,11 @@ export default function CustomerPortalClient({ token }: { token: string }) {
         {delivery && (
           <Section title="Delivery" icon={PackageCheck}>
             <div className="mt-2">
-              <div className="flex items-center gap-2 p-3 rounded-lg bg-green-900/20 border border-green-800/50">
-                <CheckCircle2 className="w-5 h-5 text-green-400" />
+              <div className="flex items-center gap-2 p-3 rounded-lg bg-green-50 border border-green-200">
+                <CheckCircle2 className="w-5 h-5 text-green-600" />
                 <div>
-                  <p className="font-medium text-green-300">Order Delivered</p>
-                  {delivery.delivery_date && <p className="text-sm text-gray-400">on {formatDate(delivery.delivery_date)}</p>}
+                  <p className="font-medium text-green-800">Order Delivered</p>
+                  {delivery.delivery_date && <p className="text-sm text-gray-500">on {formatDate(delivery.delivery_date)}</p>}
                 </div>
               </div>
             </div>
@@ -423,11 +423,11 @@ export default function CustomerPortalClient({ token }: { token: string }) {
           <Section title={`Documents (${documents.length})`} icon={FolderOpen} defaultOpen={false}>
             <div className="space-y-2 mt-2">
               {documents.map(doc => (
-                <div key={doc.id} className="flex items-center justify-between p-3 rounded-lg border border-gray-800 hover:bg-gray-800/30 transition-colors">
+                <div key={doc.id} className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center gap-3 min-w-0">
-                    <FileText className="w-4 h-4 text-red-400 flex-shrink-0" />
+                    <FileText className="w-4 h-4 text-red-600 flex-shrink-0" />
                     <div className="min-w-0">
-                      <p className="text-sm text-gray-200 truncate">{doc.file_name}</p>
+                      <p className="text-sm text-gray-800 truncate">{doc.file_name}</p>
                       <p className="text-xs text-gray-500">{DOCUMENT_TYPE_LABELS[doc.document_type as DocumentType] ?? doc.document_type}</p>
                     </div>
                   </div>
@@ -451,13 +451,13 @@ export default function CustomerPortalClient({ token }: { token: string }) {
             {/* Messages */}
             <div className="max-h-80 overflow-y-auto space-y-3 pr-1">
               {comments.length === 0 && (
-                <p className="text-center text-gray-500 text-sm py-4">No messages yet</p>
+                <p className="text-center text-gray-400 text-sm py-4">No messages yet</p>
               )}
               {comments.map(c => {
                 const isCustomer = c.author_role === 'customer'
                 return (
                   <div key={c.id} className={`flex gap-2.5 ${isCustomer ? 'flex-row-reverse' : ''}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-1 ${isCustomer ? 'bg-green-700' : 'bg-red-700'}`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0 mt-1 ${isCustomer ? 'bg-green-600' : 'bg-red-600'}`}>
                       {getInitials(c.author_name)}
                     </div>
                     <div className={`flex-1 max-w-[75%] ${isCustomer ? 'items-end' : ''} flex flex-col gap-1`}>
@@ -465,7 +465,7 @@ export default function CustomerPortalClient({ token }: { token: string }) {
                       <div className={`rounded-2xl px-3.5 py-2 text-sm ${isCustomer ? 'bg-red-600 text-white rounded-tr-sm' : 'bg-gray-100 text-gray-800 rounded-tl-sm'}`}>
                         {c.content}
                       </div>
-                      <span className={`text-xs text-gray-600 ${isCustomer ? 'text-right' : ''}`}>{formatDateTime(c.created_at)}</span>
+                      <span className={`text-xs text-gray-400 ${isCustomer ? 'text-right' : ''}`}>{formatDateTime(c.created_at)}</span>
                     </div>
                   </div>
                 )
@@ -490,7 +490,7 @@ export default function CustomerPortalClient({ token }: { token: string }) {
                   onChange={e => setComment(e.target.value)}
                   placeholder="Type your message..."
                   rows={2}
-                  className="flex-1 rounded-lg border border-red-900/50 bg-[#150a0a] px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
+                  className="flex-1 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
                 />
                 <Button type="submit" loading={sendingComment} disabled={!comment.trim() || !authorName.trim()} size="icon" className="h-full min-h-[72px] px-3">
                   <Send className="w-4 h-4" />
@@ -504,11 +504,11 @@ export default function CustomerPortalClient({ token }: { token: string }) {
         <div className="text-center py-4">
           <div className="flex items-center justify-center gap-2 mb-1">
             <div className="w-5 h-5 rounded bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center">
-              <Flame className="w-3 h-3 text-gray-900" />
+              <Flame className="w-3 h-3 text-white" />
             </div>
             <span className="text-sm font-semibold text-gray-900">Notofire</span>
           </div>
-          <p className="text-xs text-gray-600">This portal is unique to your order. Do not share this link.</p>
+          <p className="text-xs text-gray-400">This portal is unique to your order. Do not share this link.</p>
         </div>
       </div>
     </div>
@@ -518,18 +518,18 @@ export default function CustomerPortalClient({ token }: { token: string }) {
 function StatusPill({ status }: { status: POStatus }) {
   const labels = PO_STATUS_LABELS
   const colors: Partial<Record<POStatus, string>> = {
-    draft: 'bg-gray-700 text-gray-200',
-    pi_sent: 'bg-red-900/60 text-red-300 border border-red-700',
-    payment_pending: 'bg-amber-900/60 text-amber-300 border border-amber-700',
-    in_production: 'bg-purple-900/60 text-purple-300 border border-purple-700',
-    ready_for_inspection: 'bg-cyan-900/60 text-cyan-300 border border-cyan-700',
-    in_inspection: 'bg-cyan-900/60 text-cyan-300 border border-cyan-700',
-    dispatched: 'bg-orange-900/60 text-orange-300 border border-orange-700',
-    delivered: 'bg-green-900/60 text-green-300 border border-green-700',
-    cancelled: 'bg-red-900/60 text-red-300 border border-red-700',
+    draft: 'bg-gray-100 text-gray-600 border border-gray-200',
+    pi_sent: 'bg-red-50 text-red-700 border border-red-200',
+    payment_pending: 'bg-amber-50 text-amber-700 border border-amber-200',
+    in_production: 'bg-purple-50 text-purple-700 border border-purple-200',
+    ready_for_inspection: 'bg-cyan-50 text-cyan-700 border border-cyan-200',
+    in_inspection: 'bg-cyan-50 text-cyan-700 border border-cyan-200',
+    dispatched: 'bg-orange-50 text-orange-700 border border-orange-200',
+    delivered: 'bg-green-50 text-green-700 border border-green-200',
+    cancelled: 'bg-red-50 text-red-700 border border-red-200',
   }
   return (
-    <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${colors[status] ?? 'bg-gray-700 text-gray-200'}`}>
+    <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${colors[status] ?? 'bg-gray-100 text-gray-600'}`}>
       {labels[status]}
     </span>
   )
@@ -537,23 +537,23 @@ function StatusPill({ status }: { status: POStatus }) {
 
 function PaymentStatusChip({ status }: { status: string }) {
   const map: Record<string, { label: string; class: string }> = {
-    pending: { label: 'Pending', class: 'text-amber-400 bg-amber-900/30' },
-    uploaded: { label: 'Verifying', class: 'text-red-400 bg-red-900/30' },
-    approved: { label: 'Approved', class: 'text-green-400 bg-green-900/30' },
-    rejected: { label: 'Rejected', class: 'text-red-400 bg-red-900/30' },
+    pending: { label: 'Pending', class: 'text-amber-700 bg-amber-50 border border-amber-200' },
+    uploaded: { label: 'Verifying', class: 'text-blue-700 bg-blue-50 border border-blue-200' },
+    approved: { label: 'Approved', class: 'text-green-700 bg-green-50 border border-green-200' },
+    rejected: { label: 'Rejected', class: 'text-red-700 bg-red-50 border border-red-200' },
   }
-  const s = map[status] ?? { label: status, class: 'text-gray-400 bg-gray-800' }
+  const s = map[status] ?? { label: status, class: 'text-gray-600 bg-gray-100 border border-gray-200' }
   return <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${s.class}`}>{s.label}</span>
 }
 
 function PortalLoading() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="text-center">
         <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center mx-auto mb-4 animate-pulse">
-          <Flame className="w-6 h-6 text-gray-900" />
+          <Flame className="w-6 h-6 text-white" />
         </div>
-        <p className="text-gray-400">Loading your order...</p>
+        <p className="text-gray-500">Loading your order...</p>
       </div>
     </div>
   )
@@ -561,14 +561,14 @@ function PortalLoading() {
 
 function PortalError({ error }: { error: string }) {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="text-center max-w-sm">
-        <div className="w-16 h-16 rounded-full bg-red-900/30 border border-red-800 flex items-center justify-center mx-auto mb-4">
-          <AlertCircle className="w-8 h-8 text-red-400" />
+        <div className="w-16 h-16 rounded-full bg-red-50 border border-red-200 flex items-center justify-center mx-auto mb-4">
+          <AlertCircle className="w-8 h-8 text-red-500" />
         </div>
         <h1 className="text-xl font-bold text-gray-900 mb-2">Order Not Found</h1>
-        <p className="text-gray-400 text-sm">{error}</p>
-        <p className="text-gray-600 text-xs mt-4">If you believe this is an error, please contact your supplier.</p>
+        <p className="text-gray-500 text-sm">{error}</p>
+        <p className="text-gray-400 text-xs mt-4">If you believe this is an error, please contact your supplier.</p>
       </div>
     </div>
   )
