@@ -64,8 +64,8 @@ function Section({ title, icon: Icon, defaultOpen = true, children }: {
         className="flex items-center justify-between w-full px-5 py-4 text-left hover:bg-gray-800/30 transition-colors"
       >
         <div className="flex items-center gap-3">
-          <Icon className="w-5 h-5 text-blue-400" />
-          <span className="font-semibold text-white">{title}</span>
+          <Icon className="w-5 h-5 text-red-400" />
+          <span className="font-semibold text-gray-900">{title}</span>
         </div>
         {open ? <ChevronUp className="w-4 h-4 text-gray-500" /> : <ChevronDown className="w-4 h-4 text-gray-500" />}
       </button>
@@ -199,24 +199,24 @@ export default function CustomerPortalClient({ token }: { token: string }) {
   const outstanding = po.po_value - totalApproved
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f]">
+    <div className="min-h-screen bg-[#0d0405]">
       {/* Header */}
-      <header className="bg-gradient-to-r from-blue-950 to-gray-950 border-b border-gray-800 px-4 py-5">
+      <header className="bg-gradient-to-r from-red-950 to-[#0d0405] border-b border-red-950 px-4 py-5">
         <div className="max-w-2xl mx-auto">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
-              <Flame className="w-5 h-5 text-white" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center">
+              <Flame className="w-5 h-5 text-gray-900" />
             </div>
             <div>
-              <p className="text-sm font-bold text-white">Notofire</p>
+              <p className="text-sm font-bold text-gray-900">Notofire</p>
               <p className="text-xs text-gray-400">Customer Portal</p>
             </div>
           </div>
-          <h1 className="text-xl font-bold text-white">PO: {po.po_number}</h1>
+          <h1 className="text-xl font-bold text-gray-900">PO: {po.po_number}</h1>
           <p className="text-gray-400 text-sm mt-0.5">{po.customer_name}</p>
           <div className="flex items-center gap-3 mt-3 flex-wrap">
             <StatusPill status={po.status} />
-            <span className="text-sm text-gray-400">Value: <span className="text-white font-semibold">{formatCurrency(po.po_value)}</span></span>
+            <span className="text-sm text-gray-400">Value: <span className="text-gray-900 font-semibold">{formatCurrency(po.po_value)}</span></span>
           </div>
         </div>
       </header>
@@ -228,7 +228,7 @@ export default function CustomerPortalClient({ token }: { token: string }) {
           <div className="flex items-center justify-between relative">
             <div className="absolute top-4 left-0 right-0 h-0.5 bg-gray-800 z-0" />
             <div
-              className="absolute top-4 left-0 h-0.5 bg-blue-500 z-0 transition-all duration-700"
+              className="absolute top-4 left-0 h-0.5 bg-red-500 z-0 transition-all duration-700"
               style={{ width: `${Math.max(0, Math.min(100, ((currentStepIdx - 1) / (PORTAL_STEPS.length - 1)) * 100))}%` }}
             />
             {PORTAL_STEPS.map((step, i) => {
@@ -237,10 +237,10 @@ export default function CustomerPortalClient({ token }: { token: string }) {
               const current = STATUS_ORDER.indexOf(po.status) === stepStatus
               return (
                 <div key={step.key} className="flex flex-col items-center z-10 flex-1">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all ${done ? 'bg-blue-600 border-blue-500 shadow-lg shadow-blue-500/30' : 'bg-gray-900 border-gray-700'} ${current ? 'ring-2 ring-blue-400 ring-offset-2 ring-offset-gray-950' : ''}`}>
-                    {done ? <CheckCircle2 className="w-4 h-4 text-white" /> : <Circle className="w-4 h-4 text-gray-600" />}
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all ${done ? 'bg-red-600 border-red-500 shadow-lg shadow-red-500/30' : 'bg-[#150a0a] border-red-900/50'} ${current ? 'ring-2 ring-red-400 ring-offset-2 ring-offset-[#0d0405]' : ''}`}>
+                    {done ? <CheckCircle2 className="w-4 h-4 text-gray-900" /> : <Circle className="w-4 h-4 text-gray-600" />}
                   </div>
-                  <p className={`text-xs mt-2 text-center font-medium ${done ? 'text-blue-300' : 'text-gray-600'}`}>{step.label}</p>
+                  <p className={`text-xs mt-2 text-center font-medium ${done ? 'text-red-300' : 'text-gray-600'}`}>{step.label}</p>
                 </div>
               )
             })}
@@ -269,7 +269,7 @@ export default function CustomerPortalClient({ token }: { token: string }) {
                 )}
                 <button
                   onClick={() => setSelectedPayment(pendingPayment)}
-                  className="mt-3 ml-3 text-sm font-medium text-blue-400 hover:text-blue-300 underline"
+                  className="mt-3 ml-3 text-sm font-medium text-red-400 hover:text-red-300 underline"
                 >
                   Upload payment proof →
                 </button>
@@ -316,10 +316,10 @@ export default function CustomerPortalClient({ token }: { token: string }) {
               <div key={invoice.id} className="bg-gray-800/50 rounded-lg p-4 mt-2">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="font-semibold text-white">{invoice.pi_number}</p>
+                    <p className="font-semibold text-gray-900">{invoice.pi_number}</p>
                     <p className="text-sm text-gray-400">{formatDate(invoice.pi_date)}</p>
                   </div>
-                  <p className="text-xl font-bold text-blue-400">{formatCurrency(invoice.pi_amount)}</p>
+                  <p className="text-xl font-bold text-red-400">{formatCurrency(invoice.pi_amount)}</p>
                 </div>
               </div>
             ))}
@@ -333,7 +333,7 @@ export default function CustomerPortalClient({ token }: { token: string }) {
               <div className="grid grid-cols-2 gap-3 text-sm p-3 rounded-lg bg-gray-800/50">
                 <div>
                   <p className="text-gray-500">Total PO Value</p>
-                  <p className="font-bold text-white">{formatCurrency(po.po_value)}</p>
+                  <p className="font-bold text-gray-900">{formatCurrency(po.po_value)}</p>
                 </div>
                 <div>
                   <p className="text-gray-500">Amount Paid</p>
@@ -347,9 +347,9 @@ export default function CustomerPortalClient({ token }: { token: string }) {
               {payments.map(payment => (
                 <div key={payment.id} className="flex items-center justify-between p-3 rounded-lg border border-gray-800">
                   <div>
-                    <p className="font-medium text-white">{formatCurrency(payment.amount_requested)}</p>
+                    <p className="font-medium text-gray-900">{formatCurrency(payment.amount_requested)}</p>
                     <p className="text-xs text-gray-500 capitalize">{payment.payment_type} · Due {formatDate(payment.due_date)}</p>
-                    {payment.utr_number && <p className="text-xs font-mono text-blue-400">UTR: {payment.utr_number}</p>}
+                    {payment.utr_number && <p className="text-xs font-mono text-red-400">UTR: {payment.utr_number}</p>}
                   </div>
                   <PaymentStatusChip status={payment.status} />
                 </div>
@@ -365,13 +365,13 @@ export default function CustomerPortalClient({ token }: { token: string }) {
               {production.map((update, i) => (
                 <div key={update.id} className="flex gap-3">
                   <div className="flex flex-col items-center">
-                    <div className="w-7 h-7 rounded-full bg-blue-900/50 border border-blue-700 flex items-center justify-center flex-shrink-0">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+                    <div className="w-7 h-7 rounded-full bg-red-900/50 border border-red-700 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-red-400" />
                     </div>
                     {i < production.length - 1 && <div className="w-0.5 bg-gray-700 flex-1 mt-1 mb-1" />}
                   </div>
                   <div className="pb-3">
-                    <p className="font-medium text-white text-sm">{PRODUCTION_STATUS_LABELS[update.status as ProductionStatus] ?? update.status}</p>
+                    <p className="font-medium text-gray-900 text-sm">{PRODUCTION_STATUS_LABELS[update.status as ProductionStatus] ?? update.status}</p>
                     {update.notes && <p className="text-xs text-gray-400">{update.notes}</p>}
                     <p className="text-xs text-gray-600 mt-0.5">{formatDateTime(update.created_at)}</p>
                   </div>
@@ -425,7 +425,7 @@ export default function CustomerPortalClient({ token }: { token: string }) {
               {documents.map(doc => (
                 <div key={doc.id} className="flex items-center justify-between p-3 rounded-lg border border-gray-800 hover:bg-gray-800/30 transition-colors">
                   <div className="flex items-center gap-3 min-w-0">
-                    <FileText className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                    <FileText className="w-4 h-4 text-red-400 flex-shrink-0" />
                     <div className="min-w-0">
                       <p className="text-sm text-gray-200 truncate">{doc.file_name}</p>
                       <p className="text-xs text-gray-500">{DOCUMENT_TYPE_LABELS[doc.document_type as DocumentType] ?? doc.document_type}</p>
@@ -457,12 +457,12 @@ export default function CustomerPortalClient({ token }: { token: string }) {
                 const isCustomer = c.author_role === 'customer'
                 return (
                   <div key={c.id} className={`flex gap-2.5 ${isCustomer ? 'flex-row-reverse' : ''}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-1 ${isCustomer ? 'bg-green-700' : 'bg-blue-700'}`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-1 ${isCustomer ? 'bg-green-700' : 'bg-red-700'}`}>
                       {getInitials(c.author_name)}
                     </div>
                     <div className={`flex-1 max-w-[75%] ${isCustomer ? 'items-end' : ''} flex flex-col gap-1`}>
                       <span className={`text-xs text-gray-500 ${isCustomer ? 'text-right' : ''}`}>{c.author_name}</span>
-                      <div className={`rounded-2xl px-3.5 py-2 text-sm ${isCustomer ? 'bg-blue-600 text-white rounded-tr-sm' : 'bg-gray-800 text-gray-200 rounded-tl-sm'}`}>
+                      <div className={`rounded-2xl px-3.5 py-2 text-sm ${isCustomer ? 'bg-red-600 text-white rounded-tr-sm' : 'bg-gray-100 text-gray-800 rounded-tl-sm'}`}>
                         {c.content}
                       </div>
                       <span className={`text-xs text-gray-600 ${isCustomer ? 'text-right' : ''}`}>{formatDateTime(c.created_at)}</span>
@@ -490,7 +490,7 @@ export default function CustomerPortalClient({ token }: { token: string }) {
                   onChange={e => setComment(e.target.value)}
                   placeholder="Type your message..."
                   rows={2}
-                  className="flex-1 rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                  className="flex-1 rounded-lg border border-red-900/50 bg-[#150a0a] px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
                 />
                 <Button type="submit" loading={sendingComment} disabled={!comment.trim() || !authorName.trim()} size="icon" className="h-full min-h-[72px] px-3">
                   <Send className="w-4 h-4" />
@@ -503,10 +503,10 @@ export default function CustomerPortalClient({ token }: { token: string }) {
         {/* Footer */}
         <div className="text-center py-4">
           <div className="flex items-center justify-center gap-2 mb-1">
-            <div className="w-5 h-5 rounded bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
-              <Flame className="w-3 h-3 text-white" />
+            <div className="w-5 h-5 rounded bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center">
+              <Flame className="w-3 h-3 text-gray-900" />
             </div>
-            <span className="text-sm font-semibold text-white">Notofire</span>
+            <span className="text-sm font-semibold text-gray-900">Notofire</span>
           </div>
           <p className="text-xs text-gray-600">This portal is unique to your order. Do not share this link.</p>
         </div>
@@ -519,7 +519,7 @@ function StatusPill({ status }: { status: POStatus }) {
   const labels = PO_STATUS_LABELS
   const colors: Partial<Record<POStatus, string>> = {
     draft: 'bg-gray-700 text-gray-200',
-    pi_sent: 'bg-blue-900/60 text-blue-300 border border-blue-700',
+    pi_sent: 'bg-red-900/60 text-red-300 border border-red-700',
     payment_pending: 'bg-amber-900/60 text-amber-300 border border-amber-700',
     in_production: 'bg-purple-900/60 text-purple-300 border border-purple-700',
     ready_for_inspection: 'bg-cyan-900/60 text-cyan-300 border border-cyan-700',
@@ -538,7 +538,7 @@ function StatusPill({ status }: { status: POStatus }) {
 function PaymentStatusChip({ status }: { status: string }) {
   const map: Record<string, { label: string; class: string }> = {
     pending: { label: 'Pending', class: 'text-amber-400 bg-amber-900/30' },
-    uploaded: { label: 'Verifying', class: 'text-blue-400 bg-blue-900/30' },
+    uploaded: { label: 'Verifying', class: 'text-red-400 bg-red-900/30' },
     approved: { label: 'Approved', class: 'text-green-400 bg-green-900/30' },
     rejected: { label: 'Rejected', class: 'text-red-400 bg-red-900/30' },
   }
@@ -550,8 +550,8 @@ function PortalLoading() {
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
       <div className="text-center">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mx-auto mb-4 animate-pulse">
-          <Flame className="w-6 h-6 text-white" />
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center mx-auto mb-4 animate-pulse">
+          <Flame className="w-6 h-6 text-gray-900" />
         </div>
         <p className="text-gray-400">Loading your order...</p>
       </div>
@@ -566,7 +566,7 @@ function PortalError({ error }: { error: string }) {
         <div className="w-16 h-16 rounded-full bg-red-900/30 border border-red-800 flex items-center justify-center mx-auto mb-4">
           <AlertCircle className="w-8 h-8 text-red-400" />
         </div>
-        <h1 className="text-xl font-bold text-white mb-2">Order Not Found</h1>
+        <h1 className="text-xl font-bold text-gray-900 mb-2">Order Not Found</h1>
         <p className="text-gray-400 text-sm">{error}</p>
         <p className="text-gray-600 text-xs mt-4">If you believe this is an error, please contact your supplier.</p>
       </div>

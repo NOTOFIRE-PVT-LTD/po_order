@@ -55,7 +55,7 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-bold text-white">Dashboard</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
         <p className="text-gray-400 text-sm mt-1">Overview of all purchase orders</p>
       </div>
 
@@ -90,14 +90,14 @@ export default async function DashboardPage() {
                   <Link
                     key={order.id}
                     href={`/dashboard/orders/${order.id}`}
-                    className="flex items-center justify-between py-3 hover:bg-gray-800/50 -mx-2 px-2 rounded-lg transition-colors group"
+                    className="flex items-center justify-between py-3 hover:bg-gray-100/50 -mx-2 px-2 rounded-lg transition-colors group"
                   >
                     <div className="min-w-0">
-                      <p className="text-sm font-medium text-white group-hover:text-blue-400 transition-colors">{order.po_number}</p>
+                      <p className="text-sm font-medium text-gray-900 group-hover:text-blue-400 transition-colors">{order.po_number}</p>
                       <p className="text-xs text-gray-500 truncate">{order.customer_name}</p>
                     </div>
                     <div className="flex items-center gap-3 flex-shrink-0">
-                      <span className="text-sm font-medium text-gray-300 hidden sm:block">{formatCurrency(order.po_value)}</span>
+                      <span className="text-sm font-medium text-gray-600 hidden sm:block">{formatCurrency(order.po_value)}</span>
                       <POStatusBadge status={order.status} />
                     </div>
                   </Link>
@@ -126,7 +126,7 @@ export default async function DashboardPage() {
                       href={`/dashboard/orders/${payment.po_id}`}
                       className="block p-3 rounded-lg bg-amber-900/20 border border-amber-800/40 hover:border-amber-700/60 transition-colors"
                     >
-                      <p className="text-sm font-medium text-white">{po?.po_number}</p>
+                      <p className="text-sm font-medium text-gray-900">{po?.po_number}</p>
                       <p className="text-xs text-gray-400">{po?.customer_name}</p>
                       <p className="text-sm text-amber-400 font-semibold mt-1">{formatCurrency(payment.amount_requested)}</p>
                     </Link>

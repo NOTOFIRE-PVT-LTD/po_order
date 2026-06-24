@@ -53,7 +53,7 @@ export default function ProductionModule({ order, profile, initialData }: Props)
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white">Production Timeline</h2>
+        <h2 className="text-lg font-semibold text-gray-900">Production Timeline</h2>
         {isStaffOrAdmin && !showForm && (
           <Button size="sm" onClick={() => setShowForm(true)}>
             <Plus className="w-4 h-4" /> Add Update
@@ -66,9 +66,9 @@ export default function ProductionModule({ order, profile, initialData }: Props)
         {STATUSES.map(status => {
           const done = latestStatuses.has(status)
           return (
-            <div key={status} className={`p-3 rounded-lg border text-center transition-colors ${done ? 'border-green-700 bg-green-900/20' : 'border-gray-800 bg-gray-900/30'}`}>
+            <div key={status} className={`p-3 rounded-lg border text-center transition-colors ${done ? 'border-green-700 bg-green-900/20' : 'border-gray-200 bg-white/30'}`}>
               {done ? <CheckCircle2 className="w-5 h-5 text-green-400 mx-auto mb-1" /> : <Circle className="w-5 h-5 text-gray-600 mx-auto mb-1" />}
-              <p className="text-xs text-gray-300 font-medium">{PRODUCTION_STATUS_LABELS[status]}</p>
+              <p className="text-xs text-gray-600 font-medium">{PRODUCTION_STATUS_LABELS[status]}</p>
             </div>
           )
         })}
@@ -94,12 +94,12 @@ export default function ProductionModule({ order, profile, initialData }: Props)
                   onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
                   placeholder="Additional notes for the customer..."
                   rows={2}
-                  className="flex w-full rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                  className="flex w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
                 />
               </div>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={form.notify_customer} onChange={e => setForm(f => ({ ...f, notify_customer: e.target.checked }))} className="w-4 h-4 rounded" />
-                <span className="text-sm text-gray-300">Notify customer</span>
+                <span className="text-sm text-gray-600">Notify customer</span>
               </label>
               <div className="flex gap-3">
                 <Button type="button" variant="outline" onClick={() => setShowForm(false)}>Cancel</Button>
@@ -122,10 +122,10 @@ export default function ProductionModule({ order, profile, initialData }: Props)
               <div className="w-8 h-8 rounded-full bg-green-900/50 border border-green-700 flex items-center justify-center flex-shrink-0">
                 <CheckCircle2 className="w-4 h-4 text-green-400" />
               </div>
-              {i < updates.length - 1 && <div className="w-0.5 bg-gray-700 flex-1 mt-2" />}
+              {i < updates.length - 1 && <div className="w-0.5 bg-gray-200 flex-1 mt-2" />}
             </div>
             <div className="pb-4 flex-1">
-              <p className="font-medium text-white">{PRODUCTION_STATUS_LABELS[update.status as keyof typeof PRODUCTION_STATUS_LABELS] ?? update.status}</p>
+              <p className="font-medium text-gray-900">{PRODUCTION_STATUS_LABELS[update.status as keyof typeof PRODUCTION_STATUS_LABELS] ?? update.status}</p>
               {update.notes && <p className="text-sm text-gray-400 mt-0.5">{update.notes}</p>}
               <p className="text-xs text-gray-600 mt-1">{formatDateTime(update.created_at)}</p>
             </div>

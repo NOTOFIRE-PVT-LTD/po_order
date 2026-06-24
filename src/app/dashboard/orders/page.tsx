@@ -49,7 +49,7 @@ export default function OrdersPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white">Purchase Orders</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Purchase Orders</h1>
           <p className="text-gray-400 text-sm mt-1">{total} orders total</p>
         </div>
         <Button onClick={() => setShowCreate(true)}>
@@ -66,7 +66,7 @@ export default function OrdersPage() {
           placeholder="Search by PO number, customer..."
           value={search}
           onChange={e => { setSearch(e.target.value); setPage(1) }}
-          className="flex h-10 w-full rounded-lg border border-gray-700 bg-gray-900 pl-10 pr-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+          className="flex h-10 w-full rounded-lg border border-gray-300 bg-white pl-10 pr-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
         />
       </div>
 
@@ -90,7 +90,7 @@ export default function OrdersPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-gray-800">
+                  <tr className="border-b border-gray-200">
                     <th className="text-left px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">PO Number</th>
                     <th className="text-left px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider hidden md:table-cell">Customer</th>
                     <th className="text-left px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider hidden lg:table-cell">Value</th>
@@ -101,7 +101,7 @@ export default function OrdersPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-800/50">
                   {orders.map(order => (
-                    <tr key={order.id} className="hover:bg-gray-800/30 transition-colors group">
+                    <tr key={order.id} className="hover:bg-gray-100/50 transition-colors group">
                       <td className="px-6 py-4">
                         <Link href={`/dashboard/orders/${order.id}`} className="font-semibold text-blue-400 hover:text-blue-300">
                           {order.po_number}
@@ -109,11 +109,11 @@ export default function OrdersPage() {
                       </td>
                       <td className="px-6 py-4 hidden md:table-cell">
                         <div>
-                          <p className="text-gray-200 font-medium">{order.customer_name}</p>
+                          <p className="text-gray-700 font-medium">{order.customer_name}</p>
                           <p className="text-gray-500 text-xs">{order.customer_email}</p>
                         </div>
                       </td>
-                      <td className="px-6 py-4 hidden lg:table-cell text-gray-300 font-medium">
+                      <td className="px-6 py-4 hidden lg:table-cell text-gray-600 font-medium">
                         {formatCurrency(order.po_value)}
                       </td>
                       <td className="px-6 py-4">
@@ -127,7 +127,7 @@ export default function OrdersPage() {
                           <button
                             onClick={() => copyPortalLink(order.secure_token)}
                             title="Copy portal link"
-                            className="p-1.5 text-gray-500 hover:text-gray-300 transition-colors rounded"
+                            className="p-1.5 text-gray-500 hover:text-gray-600 transition-colors rounded"
                           >
                             <Copy className="w-3.5 h-3.5" />
                           </button>
@@ -135,7 +135,7 @@ export default function OrdersPage() {
                             href={`/portal/${order.secure_token}`}
                             target="_blank"
                             title="Open customer portal"
-                            className="p-1.5 text-gray-500 hover:text-gray-300 transition-colors rounded"
+                            className="p-1.5 text-gray-500 hover:text-gray-600 transition-colors rounded"
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
                           </Link>
@@ -163,7 +163,7 @@ export default function OrdersPage() {
             <Button size="sm" variant="outline" onClick={() => setPage(p => p - 1)} disabled={page === 1}>
               <ChevronLeft className="w-4 h-4" />
             </Button>
-            <span className="text-sm text-gray-300">Page {page} of {totalPages}</span>
+            <span className="text-sm text-gray-600">Page {page} of {totalPages}</span>
             <Button size="sm" variant="outline" onClick={() => setPage(p => p + 1)} disabled={page === totalPages}>
               <ChevronRight className="w-4 h-4" />
             </Button>

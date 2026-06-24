@@ -24,17 +24,17 @@ export default function AuditLogsPage() {
   const actionColors: Record<string, string> = {
     CREATE_PO: 'text-green-400',
     UPDATE_PO: 'text-blue-400',
-    DELETE_PO: 'text-red-400',
+    DELETE_PO: 'text-red-600',
     CREATE_PI: 'text-cyan-400',
     CREATE_PAYMENT_REQUEST: 'text-amber-400',
     APPROVE_PAYMENT: 'text-green-400',
-    REJECT_PAYMENT: 'text-red-400',
+    REJECT_PAYMENT: 'text-red-600',
     PRODUCTION_UPDATE: 'text-purple-400',
     UPLOAD_DOCUMENT: 'text-blue-400',
     CREATE_DISPATCH: 'text-orange-400',
     CREATE_DELIVERY: 'text-green-400',
     CREATE_USER: 'text-cyan-400',
-    DELETE_COMMENT: 'text-red-400',
+    DELETE_COMMENT: 'text-red-600',
   }
 
   const totalPages = Math.ceil(total / limit)
@@ -42,7 +42,7 @@ export default function AuditLogsPage() {
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-bold text-white">Audit Logs</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Audit Logs</h1>
         <p className="text-gray-400 text-sm mt-1">{total} total log entries</p>
       </div>
 
@@ -54,7 +54,7 @@ export default function AuditLogsPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-gray-800">
+                  <tr className="border-b border-gray-200">
                     <th className="text-left px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Timestamp</th>
                     <th className="text-left px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">User</th>
                     <th className="text-left px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Action</th>
@@ -64,13 +64,13 @@ export default function AuditLogsPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-800/50">
                   {logs.map((log) => (
-                    <tr key={log.id as string} className="hover:bg-gray-800/20 transition-colors">
+                    <tr key={log.id as string} className="hover:bg-gray-100/20 transition-colors">
                       <td className="px-6 py-3 text-gray-400 whitespace-nowrap">{formatDateTime(log.created_at as string)}</td>
                       <td className="px-6 py-3">
-                        <p className="text-gray-200">{log.user_email as string ?? 'System'}</p>
+                        <p className="text-gray-700">{log.user_email as string ?? 'System'}</p>
                       </td>
                       <td className="px-6 py-3">
-                        <span className={`font-medium ${actionColors[log.action as string] ?? 'text-gray-300'}`}>
+                        <span className={`font-medium ${actionColors[log.action as string] ?? 'text-gray-600'}`}>
                           {(log.action as string).replace(/_/g, ' ')}
                         </span>
                       </td>
@@ -95,7 +95,7 @@ export default function AuditLogsPage() {
           <p className="text-sm text-gray-400">Showing {(page - 1) * limit + 1}–{Math.min(page * limit, total)} of {total}</p>
           <div className="flex items-center gap-2">
             <Button size="sm" variant="outline" onClick={() => setPage(p => p - 1)} disabled={page === 1}><ChevronLeft className="w-4 h-4" /></Button>
-            <span className="text-sm text-gray-300">Page {page} of {totalPages}</span>
+            <span className="text-sm text-gray-600">Page {page} of {totalPages}</span>
             <Button size="sm" variant="outline" onClick={() => setPage(p => p + 1)} disabled={page === totalPages}><ChevronRight className="w-4 h-4" /></Button>
           </div>
         </div>

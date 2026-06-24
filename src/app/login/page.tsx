@@ -33,20 +33,20 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f] px-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#ffffff] px-4">
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 mb-4 shadow-lg shadow-blue-900/30">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-red-600 to-red-900 mb-4 shadow-lg shadow-red-900/40">
             <Flame className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-white">Notofire</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Notofire</h1>
           <p className="text-gray-400 text-sm mt-1">PO Management Portal</p>
         </div>
 
         {/* Card */}
-        <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-800 rounded-2xl p-8 shadow-xl">
-          <h2 className="text-xl font-semibold text-white mb-6">Sign in to your account</h2>
+        <div className="bg-[#f9fafb]/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-8 shadow-xl shadow-gray-200">
+          <h2 className="text-xl font-semibold text-gray-900 mb-6">Sign in to your account</h2>
 
           <form onSubmit={handleLogin} className="space-y-5">
             <div className="space-y-1.5">
@@ -60,7 +60,7 @@ export default function LoginPage() {
                   onChange={e => setEmail(e.target.value)}
                   placeholder="you@company.com"
                   required
-                  className="flex h-10 w-full rounded-lg border border-gray-700 bg-gray-900 pl-10 pr-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                  className="flex h-10 w-full rounded-lg border border-gray-300 bg-white pl-10 pr-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors"
                 />
               </div>
             </div>
@@ -76,7 +76,7 @@ export default function LoginPage() {
                   onChange={e => setPassword(e.target.value)}
                   placeholder="••••••••"
                   required
-                  className="flex h-10 w-full rounded-lg border border-gray-700 bg-gray-900 pl-10 pr-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                  className="flex h-10 w-full rounded-lg border border-gray-300 bg-white pl-10 pr-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors"
                 />
               </div>
             </div>

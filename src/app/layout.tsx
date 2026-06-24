@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toast";
@@ -24,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full dark`}>
-      <body className="min-h-full bg-[#0a0a0f] text-gray-100 antialiased">
+    <html lang="en" className={`${geistSans.variable} h-full`}>
+      <body className="min-h-full bg-[#ffffff] text-gray-900 antialiased">
         {children}
         <Toaster />
       </body>

@@ -41,7 +41,7 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ id
       <OrderHeader order={order} profile={profile} />
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="bg-gray-900 border border-gray-800 flex flex-wrap h-auto gap-1 p-1">
+        <TabsList className="bg-gray-50 border border-gray-200 flex flex-wrap h-auto gap-1 p-1">
           {[
             { value: 'overview', label: 'Overview' },
             { value: 'pi', label: 'PI' },
@@ -56,7 +56,7 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ id
             <TabsTrigger
               key={tab.value}
               value={tab.value}
-              className="data-[state=active]:bg-blue-600 data-[state=active]:text-white text-gray-400 hover:text-white rounded-md px-3 py-1.5 text-sm transition-all"
+              className="data-[state=active]:bg-blue-600 data-[state=active]:text-gray-900 text-gray-400 hover:text-gray-900 rounded-md px-3 py-1.5 text-sm transition-all"
             >
               {tab.label}
             </TabsTrigger>
@@ -134,8 +134,8 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ id
 
 function InfoCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-4">
-      <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">{title}</h3>
+    <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
+      <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">{title}</h3>
       <div className="space-y-2">{children}</div>
     </div>
   )

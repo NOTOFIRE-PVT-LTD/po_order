@@ -1,17 +1,17 @@
 import { createServiceClient } from '@/lib/supabase/server'
 
-interface AuditParams {
-  userId?: string
-  userEmail?: string
+interface AuditLogParams {
+  userId?: string | null
+  userEmail?: string | null
   action: string
   tableName?: string
   recordId?: string
-  oldData?: Record<string, unknown>
-  newData?: Record<string, unknown>
+  oldData?: Record<string, unknown> | null
+  newData?: Record<string, unknown> | null
   ipAddress?: string
 }
 
-export async function createAuditLog(params: AuditParams) {
+export async function createAuditLog(params: AuditLogParams) {
   try {
     const supabase = await createServiceClient()
     await supabase.from('audit_logs').insert({
@@ -25,6 +25,7 @@ export async function createAuditLog(params: AuditParams) {
       ip_address: params.ipAddress ?? null,
     })
   } catch (err) {
-    console.error('Audit log error:', err)
+    // Audit log failures should never break the main operation
+    console.error('Audit log failed:', err)
   }
 }

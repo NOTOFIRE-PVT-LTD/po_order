@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import * as React from 'react'
 import * as ToastPrimitive from '@radix-ui/react-toast'
@@ -21,10 +21,10 @@ ToastViewport.displayName = ToastPrimitive.Viewport.displayName
 type ToastVariant = 'default' | 'success' | 'error' | 'warning'
 
 const toastVariants: Record<ToastVariant, string> = {
-  default: 'border-gray-700 bg-gray-900',
-  success: 'border-green-700 bg-green-950',
-  error: 'border-red-700 bg-red-950',
-  warning: 'border-amber-700 bg-amber-950',
+  default: 'border-gray-300 bg-white',
+  success: 'border-green-300 bg-green-50',
+  error: 'border-red-300 bg-red-50',
+  warning: 'border-amber-300 bg-amber-50',
 }
 
 const Toast = React.forwardRef<
@@ -49,7 +49,7 @@ const ToastClose = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitive.Close
     ref={ref}
-    className={cn('absolute right-2 top-2 rounded-md p-1 text-gray-400 hover:text-white transition-colors', className)}
+    className={cn('absolute right-2 top-2 rounded-md p-1 text-gray-400 hover:text-gray-900 transition-colors', className)}
     toast-close=""
     {...props}
   >
@@ -62,7 +62,7 @@ const ToastTitle = React.forwardRef<
   React.ElementRef<typeof ToastPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitive.Title>
 >(({ className, ...props }, ref) => (
-  <ToastPrimitive.Title ref={ref} className={cn('text-sm font-semibold text-white', className)} {...props} />
+  <ToastPrimitive.Title ref={ref} className={cn('text-sm font-semibold text-gray-900', className)} {...props} />
 ))
 ToastTitle.displayName = ToastPrimitive.Title.displayName
 
@@ -70,7 +70,7 @@ const ToastDescription = React.forwardRef<
   React.ElementRef<typeof ToastPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitive.Description>
 >(({ className, ...props }, ref) => (
-  <ToastPrimitive.Description ref={ref} className={cn('text-sm text-gray-300', className)} {...props} />
+  <ToastPrimitive.Description ref={ref} className={cn('text-sm text-gray-600', className)} {...props} />
 ))
 ToastDescription.displayName = ToastPrimitive.Description.displayName
 
@@ -117,7 +117,7 @@ export function Toaster() {
   const icons: Record<ToastVariant, React.ReactNode> = {
     default: <Info className="h-5 w-5 text-blue-400" />,
     success: <CheckCircle className="h-5 w-5 text-green-400" />,
-    error: <XCircle className="h-5 w-5 text-red-400" />,
+    error: <XCircle className="h-5 w-5 text-red-600" />,
     warning: <AlertCircle className="h-5 w-5 text-amber-400" />,
   }
 

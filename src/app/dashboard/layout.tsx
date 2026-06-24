@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+﻿import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Sidebar from '@/components/dashboard/sidebar'
 import TopBar from '@/components/dashboard/topbar'
@@ -16,7 +16,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#0a0a0f]">
+    <div className="flex h-screen overflow-hidden bg-[#ffffff]">
       <Sidebar profile={profile} />
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <TopBar profile={profile} />

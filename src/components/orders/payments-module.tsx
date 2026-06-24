@@ -90,9 +90,9 @@ export default function PaymentsModule({ order, profile, initialData }: Props) {
     <div className="space-y-4">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h2 className="text-lg font-semibold text-white">Payments</h2>
+          <h2 className="text-lg font-semibold text-gray-900">Payments</h2>
           <div className="flex gap-4 mt-1 text-sm">
-            <span className="text-gray-400">PO Value: <span className="text-white font-medium">{formatCurrency(order.po_value as number)}</span></span>
+            <span className="text-gray-400">PO Value: <span className="text-gray-900 font-medium">{formatCurrency(order.po_value as number)}</span></span>
             <span className="text-gray-400">Collected: <span className="text-green-400 font-medium">{formatCurrency(totalApproved)}</span></span>
             <span className="text-gray-400">Outstanding: <span className="text-amber-400 font-medium">{formatCurrency(outstanding)}</span></span>
           </div>
@@ -141,7 +141,7 @@ export default function PaymentsModule({ order, profile, initialData }: Props) {
               </div>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={form.send_notifications} onChange={e => setForm(f => ({ ...f, send_notifications: e.target.checked }))} className="w-4 h-4 rounded" />
-                <span className="text-sm text-gray-300">Send notifications to customer</span>
+                <span className="text-sm text-gray-600">Send notifications to customer</span>
               </label>
               <div className="flex gap-3">
                 <Button type="button" variant="outline" onClick={() => setShowForm(false)}>Cancel</Button>
@@ -162,17 +162,17 @@ export default function PaymentsModule({ order, profile, initialData }: Props) {
             <div className="flex items-start justify-between flex-wrap gap-4">
               <div className="space-y-1">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-xl font-bold text-white">{formatCurrency(payment.amount_requested)}</span>
+                  <span className="text-xl font-bold text-gray-900">{formatCurrency(payment.amount_requested)}</span>
                   <PaymentStatusBadge status={payment.status} />
-                  <span className="text-xs bg-gray-800 text-gray-300 px-2 py-0.5 rounded capitalize">{payment.payment_type}</span>
+                  <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded capitalize">{payment.payment_type}</span>
                 </div>
                 <p className="text-sm text-gray-400">Due: {formatDate(payment.due_date)}</p>
-                {payment.utr_number && <p className="text-sm text-gray-300">UTR: <span className="font-mono text-blue-400">{payment.utr_number}</span></p>}
+                {payment.utr_number && <p className="text-sm text-gray-600">UTR: <span className="font-mono text-blue-400">{payment.utr_number}</span></p>}
                 {payment.outstanding_balance !== null && payment.outstanding_balance !== undefined && (
                   <p className="text-sm text-gray-400">Outstanding after: {formatCurrency(payment.outstanding_balance)}</p>
                 )}
                 {payment.rejection_reason && (
-                  <p className="text-sm text-red-400">Rejected: {payment.rejection_reason}</p>
+                  <p className="text-sm text-red-600">Rejected: {payment.rejection_reason}</p>
                 )}
               </div>
 

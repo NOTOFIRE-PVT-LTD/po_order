@@ -71,7 +71,7 @@ export default function DispatchModule({ order, profile, initialData }: Props) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white">Dispatch</h2>
+        <h2 className="text-lg font-semibold text-gray-900">Dispatch</h2>
         {isStaffOrAdmin && !showForm && !dispatch && (
           <Button size="sm" onClick={() => setShowForm(true)}><Plus className="w-4 h-4" /> Add Dispatch</Button>
         )}
@@ -82,12 +82,12 @@ export default function DispatchModule({ order, profile, initialData }: Props) {
           <CardContent className="p-5">
             <div className="flex items-center gap-2 mb-4">
               <Truck className="w-5 h-5 text-orange-400" />
-              <span className="font-semibold text-white">Dispatch Details</span>
+              <span className="font-semibold text-gray-900">Dispatch Details</span>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
-              <div><span className="text-gray-500">Vehicle:</span> <span className="text-gray-200 font-mono">{dispatch.vehicle_number}</span></div>
-              <div><span className="text-gray-500">Transporter:</span> <span className="text-gray-200">{dispatch.transporter}</span></div>
-              <div><span className="text-gray-500">Date:</span> <span className="text-gray-200">{formatDate(dispatch.dispatch_date)}</span></div>
+              <div><span className="text-gray-500">Vehicle:</span> <span className="text-gray-700 font-mono">{dispatch.vehicle_number}</span></div>
+              <div><span className="text-gray-500">Transporter:</span> <span className="text-gray-700">{dispatch.transporter}</span></div>
+              <div><span className="text-gray-500">Date:</span> <span className="text-gray-700">{formatDate(dispatch.dispatch_date)}</span></div>
             </div>
             {dispatch.notes && <p className="text-sm text-gray-400 mt-3">{dispatch.notes}</p>}
           </CardContent>

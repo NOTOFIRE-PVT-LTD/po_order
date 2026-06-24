@@ -36,19 +36,19 @@ export default function OrderHeader({ order, profile }: { order: Record<string, 
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
-        <Link href="/dashboard/orders" className="text-gray-400 hover:text-white transition-colors">
+        <Link href="/dashboard/orders" className="text-gray-400 hover:text-gray-900 transition-colors">
           <ChevronLeft className="w-5 h-5" />
         </Link>
         <span className="text-gray-600">/</span>
-        <span className="text-gray-300 text-sm">Purchase Orders</span>
+        <span className="text-gray-600 text-sm">Purchase Orders</span>
         <span className="text-gray-600">/</span>
-        <span className="text-white text-sm font-medium">{order.po_number as string}</span>
+        <span className="text-gray-900 text-sm font-medium">{order.po_number as string}</span>
       </div>
 
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
           <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-2xl font-bold text-white">{order.po_number as string}</h1>
+            <h1 className="text-2xl font-bold text-gray-900">{order.po_number as string}</h1>
             <POStatusBadge status={order.status as 'draft'} />
           </div>
           <p className="text-gray-400 mt-1">{order.customer_name as string} • {formatCurrency(order.po_value as number)}</p>

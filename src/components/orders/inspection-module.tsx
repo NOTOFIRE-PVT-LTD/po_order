@@ -82,7 +82,7 @@ export default function InspectionModule({ order, profile, initialData }: Props)
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white">Inspection</h2>
+        <h2 className="text-lg font-semibold text-gray-900">Inspection</h2>
         {isStaffOrAdmin && !showForm && !inspection && (
           <Button size="sm" onClick={() => setShowForm(true)}><Plus className="w-4 h-4" /> Add Inspection</Button>
         )}
@@ -93,12 +93,12 @@ export default function InspectionModule({ order, profile, initialData }: Props)
           <CardContent className="p-5">
             <div className="flex items-center gap-2 mb-4">
               <FlaskConical className="w-5 h-5 text-cyan-400" />
-              <span className="font-semibold text-white">Inspection Details</span>
+              <span className="font-semibold text-gray-900">Inspection Details</span>
             </div>
             <div className="grid grid-cols-2 gap-3 text-sm">
-              <div><span className="text-gray-500">Date:</span> <span className="text-gray-200">{formatDate(inspection.inspection_date)}</span></div>
-              <div><span className="text-gray-500">Inspector:</span> <span className="text-gray-200">{inspection.inspector_name ?? '—'}</span></div>
-              <div><span className="text-gray-500">Result:</span> <span className={`font-medium ${inspection.result === 'passed' ? 'text-green-400' : inspection.result === 'failed' ? 'text-red-400' : 'text-gray-200'}`}>{inspection.result ?? '—'}</span></div>
+              <div><span className="text-gray-500">Date:</span> <span className="text-gray-700">{formatDate(inspection.inspection_date)}</span></div>
+              <div><span className="text-gray-500">Inspector:</span> <span className="text-gray-700">{inspection.inspector_name ?? '—'}</span></div>
+              <div><span className="text-gray-500">Result:</span> <span className={`font-medium ${inspection.result === 'passed' ? 'text-green-400' : inspection.result === 'failed' ? 'text-red-600' : 'text-gray-700'}`}>{inspection.result ?? '—'}</span></div>
             </div>
             {inspection.notes && <p className="text-sm text-gray-400 mt-3">{inspection.notes}</p>}
           </CardContent>
@@ -126,7 +126,7 @@ export default function InspectionModule({ order, profile, initialData }: Props)
               </div>
               <div className="space-y-1.5">
                 <Label>Notes</Label>
-                <textarea value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} rows={2} className="flex w-full rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" />
+                <textarea value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} rows={2} className="flex w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" />
               </div>
               <div>
                 <Label className="mb-3 block">Documents</Label>

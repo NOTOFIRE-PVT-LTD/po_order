@@ -62,7 +62,7 @@ export default function UsersPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Users</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Users</h1>
           <p className="text-gray-400 text-sm mt-1">{users.length} total users</p>
         </div>
         <Button onClick={() => setShowCreate(true)}>
@@ -78,11 +78,11 @@ export default function UsersPage() {
             <div className="divide-y divide-gray-800">
               {users.map(user => (
                 <div key={user.id} className="flex items-center gap-4 px-6 py-4">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-sm font-bold text-white flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-sm font-bold text-gray-900 flex-shrink-0">
                     {getInitials(user.full_name)}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-white">{user.full_name}</p>
+                    <p className="font-medium text-gray-900">{user.full_name}</p>
                     <p className="text-sm text-gray-400">{user.email}</p>
                     {user.mobile && <p className="text-xs text-gray-500">{user.mobile}</p>}
                   </div>

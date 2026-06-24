@@ -1,8 +1,13 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 :root {
-  --background: #0a0a0f;
-  --foreground: #f0f0f5;
+  --background: #ffffff;
+  --foreground: #111111;
+  --primary: #dc2626;
+  --primary-hover: #b91c1c;
+  --border: #e5e7eb;
+  --card: #f9fafb;
+  --muted: #f3f4f6;
 }
 
 @theme inline {
@@ -27,9 +32,9 @@ body {
 }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #1a1a2e; }
-::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+::-webkit-scrollbar-track { background: #f9fafb; }
+::-webkit-scrollbar-thumb { background: #dc2626; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #b91c1c; }
 
 @keyframes shimmer {
   0% { background-position: -1000px 0; }
@@ -37,7 +42,7 @@ body {
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #1f2937 25%, #374151 50%, #1f2937 75%);
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
   background-size: 1000px 100%;
   animation: shimmer 2s infinite;
   border-radius: 6px;

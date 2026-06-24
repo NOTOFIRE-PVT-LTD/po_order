@@ -46,10 +46,10 @@ export default function TopBar({ profile }: { profile: Profile }) {
 
   return (
     <>
-      <header className="flex items-center justify-between px-4 md:px-6 h-16 border-b border-gray-800 bg-gray-950/80 backdrop-blur-sm flex-shrink-0">
+      <header className="flex items-center justify-between px-4 md:px-6 h-16 border-b border-gray-200 bg-[#ffffff]/90 backdrop-blur-sm flex-shrink-0">
         {/* Mobile menu toggle */}
         <button
-          className="md:hidden text-gray-400 hover:text-white"
+          className="md:hidden text-gray-400 hover:text-gray-900"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           <Menu className="w-5 h-5" />
@@ -58,7 +58,7 @@ export default function TopBar({ profile }: { profile: Profile }) {
         {/* Page breadcrumb / title */}
         <div className="hidden md:block">
           <p className="text-sm text-gray-400">
-            Welcome back, <span className="text-white font-medium">{profile.full_name}</span>
+            Welcome back, <span className="text-gray-900 font-medium">{profile.full_name}</span>
           </p>
         </div>
 
@@ -73,13 +73,13 @@ export default function TopBar({ profile }: { profile: Profile }) {
       {mobileOpen && (
         <div className="md:hidden fixed inset-0 z-50">
           <div className="absolute inset-0 bg-black/70" onClick={() => setMobileOpen(false)} />
-          <div className="absolute left-0 top-0 bottom-0 w-64 bg-gray-950 border-r border-gray-800 flex flex-col">
-            <div className="flex items-center gap-3 px-6 py-5 border-b border-gray-800">
-              <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-blue-600 to-blue-800">
-                <Flame className="w-5 h-5 text-white" />
+          <div className="absolute left-0 top-0 bottom-0 w-64 bg-[#ffffff] border-r border-gray-200 flex flex-col">
+            <div className="flex items-center gap-3 px-6 py-5 border-b border-gray-200">
+              <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-red-600 to-red-900">
+                <Flame className="w-5 h-5 text-gray-900" />
               </div>
               <div>
-                <p className="text-sm font-bold text-white">Notofire</p>
+                <p className="text-sm font-bold text-gray-900">Notofire</p>
                 <p className="text-xs text-gray-500">PO Portal</p>
               </div>
             </div>
@@ -93,7 +93,7 @@ export default function TopBar({ profile }: { profile: Profile }) {
                     onClick={() => setMobileOpen(false)}
                     className={cn(
                       'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all',
-                      active ? 'bg-blue-600/20 text-blue-400' : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                      active ? 'bg-red-600/20 text-red-600' : 'text-gray-400 hover:text-gray-900 hover:bg-red-50'
                     )}
                   >
                     <item.icon className="w-4 h-4" />
@@ -102,8 +102,8 @@ export default function TopBar({ profile }: { profile: Profile }) {
                 )
               })}
             </nav>
-            <div className="px-4 py-4 border-t border-gray-800">
-              <button onClick={handleLogout} className="flex items-center gap-2 text-sm text-gray-400 hover:text-white">
+            <div className="px-4 py-4 border-t border-gray-200">
+              <button onClick={handleLogout} className="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-900">
                 <LogOut className="w-4 h-4" />
                 Sign out
               </button>

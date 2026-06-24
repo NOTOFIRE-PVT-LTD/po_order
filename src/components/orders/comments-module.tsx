@@ -73,9 +73,9 @@ export default function CommentsModule({ order, profile, initialData }: Props) {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-lg font-semibold text-white">Discussion ({comments.filter(c => !c.is_internal).length})</h2>
+      <h2 className="text-lg font-semibold text-gray-900">Discussion ({comments.filter(c => !c.is_internal).length})</h2>
 
-      <div className="rounded-xl border border-gray-800 bg-gray-900/50 overflow-hidden">
+      <div className="rounded-xl border border-gray-200 bg-white overflow-hidden">
         <div className="max-h-[500px] overflow-y-auto p-4 space-y-4">
           {comments.length === 0 && (
             <p className="text-center text-gray-500 py-8">No messages yet. Start the conversation!</p>
@@ -92,18 +92,18 @@ export default function CommentsModule({ order, profile, initialData }: Props) {
                 </div>
                 <div className={`flex-1 max-w-[75%] ${isMe ? 'items-end' : 'items-start'} flex flex-col gap-1`}>
                   <div className={`flex items-center gap-2 ${isMe ? 'flex-row-reverse' : ''}`}>
-                    <span className="text-xs font-medium text-gray-300">{comment.author_name}</span>
+                    <span className="text-xs font-medium text-gray-600">{comment.author_name}</span>
                     <span className="text-xs text-gray-600 capitalize">{comment.author_role}</span>
-                    {comment.is_internal && <span className="text-xs bg-yellow-900/50 text-yellow-400 border border-yellow-800 px-1.5 py-0.5 rounded">Internal</span>}
+                    {comment.is_internal && <span className="text-xs bg-yellow-50 text-yellow-700 border border-yellow-300 px-1.5 py-0.5 rounded">Internal</span>}
                   </div>
-                  <div className={`relative rounded-2xl px-4 py-2.5 text-sm ${isMe ? 'bg-blue-600 text-white rounded-tr-sm' : 'bg-gray-800 text-gray-200 rounded-tl-sm'} ${comment.is_internal ? 'border border-yellow-700/50' : ''}`}>
+                  <div className={`relative rounded-2xl px-4 py-2.5 text-sm ${isMe ? 'bg-red-600 text-white rounded-tr-sm' : 'bg-gray-100 text-gray-700 rounded-tl-sm'} ${comment.is_internal ? 'border border-yellow-700/50' : ''}`}>
                     {comment.content}
                     {isAdmin && (
                       <button
                         onClick={() => handleDelete(comment.id)}
                         className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-red-600 rounded-full p-0.5 hover:bg-red-700"
                       >
-                        <Trash2 className="w-3 h-3 text-white" />
+                        <Trash2 className="w-3 h-3 text-gray-900" />
                       </button>
                     )}
                   </div>
@@ -116,14 +116,14 @@ export default function CommentsModule({ order, profile, initialData }: Props) {
         </div>
 
         {/* Input */}
-        <div className="border-t border-gray-800 p-4">
+        <div className="border-t border-gray-200 p-4">
           <form onSubmit={handleSend} className="space-y-3">
             <textarea
               value={content}
               onChange={e => setContent(e.target.value)}
               placeholder="Type a message..."
               rows={2}
-              className="flex w-full rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="flex w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
               onKeyDown={e => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                   e.preventDefault()

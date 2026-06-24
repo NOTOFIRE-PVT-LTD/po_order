@@ -72,7 +72,7 @@ export default function PIModule({ order, profile, initialData }: Props) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white">Proforma Invoices</h2>
+        <h2 className="text-lg font-semibold text-gray-900">Proforma Invoices</h2>
         {!showForm && (
           <Button size="sm" onClick={() => setShowForm(true)}>
             <Plus className="w-4 h-4" /> Add PI
@@ -107,7 +107,7 @@ export default function PIModule({ order, profile, initialData }: Props) {
 
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={form.send_notifications} onChange={e => setForm(f => ({ ...f, send_notifications: e.target.checked }))} className="w-4 h-4 rounded border-gray-600 text-blue-600" />
-                <span className="text-sm text-gray-300 flex items-center gap-1.5"><Bell className="w-3.5 h-3.5" />Send WhatsApp & Email notifications to customer</span>
+                <span className="text-sm text-gray-600 flex items-center gap-1.5"><Bell className="w-3.5 h-3.5" />Send WhatsApp & Email notifications to customer</span>
               </label>
 
               <div className="flex gap-3">
@@ -128,7 +128,7 @@ export default function PIModule({ order, profile, initialData }: Props) {
           <CardContent className="p-5">
             <div className="flex items-start justify-between">
               <div className="space-y-1">
-                <p className="font-semibold text-white">{pi.pi_number}</p>
+                <p className="font-semibold text-gray-900">{pi.pi_number}</p>
                 <p className="text-sm text-gray-400">{formatDate(pi.pi_date)}</p>
                 <p className="text-xl font-bold text-blue-400">{formatCurrency(pi.pi_amount)}</p>
               </div>

@@ -71,7 +71,7 @@ export default function DeliveryModule({ order, profile, initialData }: Props) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white">Delivery</h2>
+        <h2 className="text-lg font-semibold text-gray-900">Delivery</h2>
         {isStaffOrAdmin && !showForm && !delivery && (
           <Button size="sm" onClick={() => setShowForm(true)}><Plus className="w-4 h-4" /> Confirm Delivery</Button>
         )}
@@ -82,11 +82,11 @@ export default function DeliveryModule({ order, profile, initialData }: Props) {
           <CardContent className="p-5">
             <div className="flex items-center gap-2 mb-4">
               <PackageCheck className="w-5 h-5 text-green-400" />
-              <span className="font-semibold text-white">Delivery Confirmed</span>
+              <span className="font-semibold text-gray-900">Delivery Confirmed</span>
             </div>
             <div className="grid grid-cols-2 gap-3 text-sm">
-              <div><span className="text-gray-500">Delivery Date:</span> <span className="text-gray-200">{formatDate(delivery.delivery_date)}</span></div>
-              <div><span className="text-gray-500">Received By:</span> <span className="text-gray-200">{delivery.received_by ?? '—'}</span></div>
+              <div><span className="text-gray-500">Delivery Date:</span> <span className="text-gray-700">{formatDate(delivery.delivery_date)}</span></div>
+              <div><span className="text-gray-500">Received By:</span> <span className="text-gray-700">{delivery.received_by ?? '—'}</span></div>
             </div>
             {delivery.notes && <p className="text-sm text-gray-400 mt-3">{delivery.notes}</p>}
           </CardContent>

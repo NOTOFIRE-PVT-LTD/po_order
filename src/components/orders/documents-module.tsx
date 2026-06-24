@@ -94,7 +94,7 @@ export default function DocumentsModule({ order, profile, initialData }: Props) 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white">Documents ({docs.length})</h2>
+        <h2 className="text-lg font-semibold text-gray-900">Documents ({docs.length})</h2>
         {isStaffOrAdmin && !showForm && (
           <Button size="sm" onClick={() => setShowForm(true)}><Plus className="w-4 h-4" /> Upload</Button>
         )}
@@ -137,11 +137,11 @@ export default function DocumentsModule({ order, profile, initialData }: Props) 
           </h3>
           <div className="space-y-2">
             {typeDocs.map(doc => (
-              <div key={doc.id} className="flex items-center justify-between p-3 rounded-lg border border-gray-800 bg-gray-900/50 hover:bg-gray-800/50 transition-colors">
+              <div key={doc.id} className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-white hover:bg-gray-100/50 transition-colors">
                 <div className="flex items-center gap-3 min-w-0">
                   <FileText className="w-4 h-4 text-blue-400 flex-shrink-0" />
                   <div className="min-w-0">
-                    <p className="text-sm text-gray-200 font-medium truncate">{doc.file_name}</p>
+                    <p className="text-sm text-gray-700 font-medium truncate">{doc.file_name}</p>
                     <p className="text-xs text-gray-500">
                       {formatDateTime(doc.created_at)}
                       {(doc as { uploaded_by_profile?: { full_name: string } }).uploaded_by_profile && ` · ${(doc as { uploaded_by_profile?: { full_name: string } }).uploaded_by_profile?.full_name}`}
