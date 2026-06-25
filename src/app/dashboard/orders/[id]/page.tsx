@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
+import { getPortalLink } from '@/lib/utils'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import OrderHeader from '@/components/orders/order-header'
 import PIModule from '@/components/orders/pi-module'
@@ -89,7 +90,7 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ id
               )}
               <InfoCard title="Portal Link">
                 <p className="text-xs text-gray-100 break-all font-mono bg-gray-800 p-2 rounded select-all">
-                  {`${process.env.NEXT_PUBLIC_APP_URL ?? ''}/portal/${order.secure_token}`}
+                  {getPortalLink(order.secure_token)}
                 </p>
               </InfoCard>
             </div>

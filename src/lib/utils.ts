@@ -33,9 +33,10 @@ export function formatDateTime(date: string | null | undefined) {
   })
 }
 
+const PRODUCTION_URL = 'https://po-order-eta.vercel.app'
+
 function getAppUrl() {
-  // Vercel sets VERCEL_URL automatically on every deployment (no https://)
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
+  if (process.env.NODE_ENV === 'production') return PRODUCTION_URL
   return 'http://localhost:3000'
 }
 
