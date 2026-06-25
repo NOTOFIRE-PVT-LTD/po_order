@@ -66,6 +66,13 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     }
 
     try {
+      // Build public URL for the PI PDF so it can be attached in the WhatsApp template
+      let piPdfUrl: string | null = null
+      if (pi_pdf_path) {
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+        piPdfUrl = `${supabaseUrl}/storage/v1/object/public/po-documents/${pi_pdf_path}`
+      }
+
       await sendPIWhatsApp({
         mobile: po.customer_mobile,
         customerName: po.customer_name,
@@ -73,6 +80,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
         piNumber: pi_number,
         piAmount: parseFloat(pi_amount),
         portalLink,
+        piPdfUrl,
       })
       waSent = true
       await supabase.from('proforma_invoices').update({ notified_whatsapp: true }).eq('id', pi.id)

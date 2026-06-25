@@ -40,6 +40,36 @@ async function sendWhatsAppMessage(to: string, body: string) {
   return await response.json()
 }
 
+async function sendWhatsAppTemplate(to: string, templateName: string, languageCode: string, components: object[]) {
+  const phone = sanitizePhone(to)
+
+  const response = await fetch(`${WA_API_URL}/${PHONE_NUMBER_ID}/messages`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      messaging_product: 'whatsapp',
+      recipient_type: 'individual',
+      to: phone,
+      type: 'template',
+      template: {
+        name: templateName,
+        language: { code: languageCode },
+        components,
+      },
+    }),
+  })
+
+  if (!response.ok) {
+    const err = await response.json()
+    throw new Error(`WhatsApp API error: ${JSON.stringify(err)}`)
+  }
+
+  return await response.json()
+}
+
 export async function sendPIWhatsApp(params: {
   mobile: string
   customerName: string
@@ -47,23 +77,38 @@ export async function sendPIWhatsApp(params: {
   piNumber: string
   piAmount: number
   portalLink: string
+  piPdfUrl?: string | null
 }) {
-  const message = `🏭 *Notofire - Proforma Invoice Ready*
+  const components: object[] = []
 
-Dear ${params.customerName},
+  // Header: attach PI document if available
+  if (params.piPdfUrl) {
+    components.push({
+      type: 'header',
+      parameters: [
+        {
+          type: 'document',
+          document: {
+            link: params.piPdfUrl,
+            filename: `${params.piNumber}.pdf`,
+          },
+        },
+      ],
+    })
+  }
 
-Your Proforma Invoice has been generated.
+  // Body: tracking link variable
+  components.push({
+    type: 'body',
+    parameters: [
+      {
+        type: 'text',
+        text: params.portalLink,
+      },
+    ],
+  })
 
-📋 *PO Number:* ${params.poNumber}
-🔖 *PI Number:* ${params.piNumber}
-💰 *PI Amount:* ${formatCurrency(params.piAmount)}
-
-Click below to view your portal and make payment:
-${params.portalLink}
-
-_This link is unique to your order. Do not share._`
-
-  return await sendWhatsAppMessage(params.mobile, message)
+  return await sendWhatsAppTemplate(params.mobile, 'pi_tracking', 'en', components)
 }
 
 export async function sendPaymentRequestWhatsApp(params: {
