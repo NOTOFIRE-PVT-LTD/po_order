@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
 import { createAuditLog } from '@/lib/audit'
-import { sendPaymentApprovedEmail } from '@/lib/notifications/email'
 import { sendPaymentApprovedWhatsApp } from '@/lib/notifications/whatsapp'
 import { getPortalLink } from '@/lib/utils'
 import { NextRequest, NextResponse } from 'next/server'
@@ -51,17 +50,6 @@ export async function POST(
 
   if (action === 'approve') {
     const portalLink = getPortalLink(po.secure_token)
-    try {
-      await sendPaymentApprovedEmail({
-        customerName: po.customer_name,
-        customerEmail: po.customer_email,
-        poNumber: po.po_number,
-        amountRequested: payment.amount_requested,
-        outstandingBalance: outstanding_balance ?? null,
-        portalLink,
-      })
-    } catch (err) { console.error('Email failed:', err) }
-
     try {
       await sendPaymentApprovedWhatsApp({
         mobile: po.customer_mobile,

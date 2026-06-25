@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
 import { createAuditLog } from '@/lib/audit'
-import { sendPaymentRequestEmail } from '@/lib/notifications/email'
 import { sendPaymentRequestWhatsApp } from '@/lib/notifications/whatsapp'
 import { getPortalLink } from '@/lib/utils'
 import { NextRequest, NextResponse } from 'next/server'
@@ -61,25 +60,11 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
-  // Update PO status
   await supabase.from('purchase_orders').update({ status: 'payment_pending', updated_by: user.id }).eq('id', id)
 
   const portalLink = getPortalLink(po.secure_token)
 
   if (send_notifications) {
-    try {
-      await sendPaymentRequestEmail({
-        customerName: po.customer_name,
-        customerEmail: po.customer_email,
-        poNumber: po.po_number,
-        amountRequested: parseFloat(amount_requested),
-        paymentType: payment_type,
-        dueDate: due_date,
-        upiLink: upi_link ?? null,
-        portalLink,
-      })
-    } catch (err) { console.error('Email failed:', err) }
-
     try {
       await sendPaymentRequestWhatsApp({
         mobile: po.customer_mobile,

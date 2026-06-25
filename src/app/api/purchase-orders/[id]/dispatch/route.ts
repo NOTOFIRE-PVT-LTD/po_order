@@ -1,7 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { createAuditLog } from '@/lib/audit'
 import { sendDispatchWhatsApp } from '@/lib/notifications/whatsapp'
-import { sendStatusUpdateEmail } from '@/lib/notifications/email'
 import { getPortalLink } from '@/lib/utils'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -49,17 +48,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       portalLink,
     })
   } catch (err) { console.error('WhatsApp failed:', err) }
-
-  try {
-    await sendStatusUpdateEmail({
-      customerName: po.customer_name,
-      customerEmail: po.customer_email,
-      poNumber: po.po_number,
-      status: 'Dispatched',
-      message: `Your order (PO ${po.po_number}) has been dispatched.\n\nTransporter: ${transporter}\nVehicle: ${vehicle_number}\nDispatch Date: ${dispatch_date}`,
-      portalLink,
-    })
-  } catch (err) { console.error('Email failed:', err) }
 
   await createAuditLog({
     userId: user.id,

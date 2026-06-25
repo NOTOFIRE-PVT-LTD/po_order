@@ -1,7 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { createAuditLog } from '@/lib/audit'
 import { sendProductionUpdateWhatsApp } from '@/lib/notifications/whatsapp'
-import { sendStatusUpdateEmail } from '@/lib/notifications/email'
 import { getPortalLink } from '@/lib/utils'
 import { PRODUCTION_STATUS_LABELS } from '@/types'
 import { NextRequest, NextResponse } from 'next/server'
@@ -31,7 +30,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
-  // Map production status to PO status
   const poStatusMap: Record<string, string> = {
     production_started: 'in_production',
     material_ready: 'in_production',
@@ -55,17 +53,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
         portalLink,
       })
     } catch (err) { console.error('WhatsApp failed:', err) }
-
-    try {
-      await sendStatusUpdateEmail({
-        customerName: po.customer_name,
-        customerEmail: po.customer_email,
-        poNumber: po.po_number,
-        status: statusLabel,
-        message: `Your order production status has been updated to: ${statusLabel}${notes ? `\n\nNote: ${notes}` : ''}`,
-        portalLink,
-      })
-    } catch (err) { console.error('Email failed:', err) }
   }
 
   await createAuditLog({

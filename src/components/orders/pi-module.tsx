@@ -60,8 +60,8 @@ export default function PIModule({ order, profile, initialData }: Props) {
       setPiFile(null)
       setForm({ pi_number: '', pi_date: '', pi_amount: '', send_notifications: true })
 
-      const notifStatus = `Email: ${data.notifications?.email ? '✓' : '✗'}, WhatsApp: ${data.notifications?.whatsapp ? '✓' : '✗'}`
-      toast({ title: 'PI Created', description: form.send_notifications ? `Notifications: ${notifStatus}` : 'PI saved without notifications', variant: 'success' })
+      const waStatus = data.notifications?.whatsapp ? 'WhatsApp sent ✓' : 'WhatsApp failed ✗'
+      toast({ title: 'PI Created', description: form.send_notifications ? waStatus : 'PI saved without notifications', variant: 'success' })
     } catch (err) {
       toast({ title: 'Error', description: err instanceof Error ? err.message : 'Failed', variant: 'error' })
     } finally {

@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
 import { createAuditLog } from '@/lib/audit'
-import { sendPINotificationEmail } from '@/lib/notifications/email'
 import { sendPIWhatsApp } from '@/lib/notifications/whatsapp'
 import { getPortalLink } from '@/lib/utils'
 import { NextRequest, NextResponse } from 'next/server'
@@ -41,36 +40,16 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
-  // Update PO status to pi_sent
   await supabase.from('purchase_orders').update({ status: 'pi_sent', updated_by: user.id }).eq('id', id)
 
   const portalLink = getPortalLink(po.secure_token)
-  let emailSent = false
   let waSent = false
 
   if (send_notifications) {
     try {
-      await sendPINotificationEmail({
-        customerName: po.customer_name,
-        customerEmail: po.customer_email,
-        poNumber: po.po_number,
-        piNumber: pi_number,
-        piAmount: parseFloat(pi_amount),
-        piDate: pi_date,
-        portalLink,
-      })
-      emailSent = true
-      await supabase.from('proforma_invoices').update({ notified_email: true }).eq('id', pi.id)
-    } catch (err) {
-      console.error('Email notification failed:', err)
-    }
-
-    try {
-      // Build public URL for the PI PDF so it can be attached in the WhatsApp template
       let piPdfUrl: string | null = null
       if (pi_pdf_path) {
-        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-        piPdfUrl = `${supabaseUrl}/storage/v1/object/public/po-documents/${pi_pdf_path}`
+        piPdfUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/po-documents/${pi_pdf_path}`
       }
 
       await sendPIWhatsApp({
@@ -98,5 +77,5 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     newData: pi,
   })
 
-  return NextResponse.json({ data: pi, notifications: { email: emailSent, whatsapp: waSent } }, { status: 201 })
+  return NextResponse.json({ data: pi, notifications: { whatsapp: waSent } }, { status: 201 })
 }
