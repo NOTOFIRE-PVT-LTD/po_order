@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { createAuditLog } from '@/lib/audit'
 import { sendPIWhatsApp } from '@/lib/notifications/whatsapp'
 import { getPortalLink } from '@/lib/utils'
@@ -49,7 +49,12 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     try {
       let piPdfUrl: string | null = null
       if (pi_pdf_path) {
-        piPdfUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/po-documents/${pi_pdf_path}`
+        // Generate a signed URL (1 hour) so AiSensy can download the file
+        const adminClient = await createServiceClient()
+        const { data: signedData } = await adminClient.storage
+          .from('po-documents')
+          .createSignedUrl(pi_pdf_path, 3600)
+        piPdfUrl = signedData?.signedUrl ?? null
       }
 
       await sendPIWhatsApp({

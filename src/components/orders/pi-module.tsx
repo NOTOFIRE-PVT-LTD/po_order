@@ -107,7 +107,7 @@ export default function PIModule({ order, profile, initialData }: Props) {
 
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={form.send_notifications} onChange={e => setForm(f => ({ ...f, send_notifications: e.target.checked }))} className="w-4 h-4 rounded border-gray-600 text-blue-600" />
-                <span className="text-sm text-gray-600 flex items-center gap-1.5"><Bell className="w-3.5 h-3.5" />Send WhatsApp & Email notifications to customer</span>
+                <span className="text-sm text-gray-600 flex items-center gap-1.5"><Bell className="w-3.5 h-3.5" />Send WhatsApp notification to customer</span>
               </label>
 
               <div className="flex gap-3">
@@ -133,7 +133,6 @@ export default function PIModule({ order, profile, initialData }: Props) {
                 <p className="text-xl font-bold text-blue-600">{formatCurrency(pi.pi_amount)}</p>
               </div>
               <div className="flex items-center gap-2 text-xs text-gray-500">
-                {pi.notified_email && <span className="text-green-600">✉ Email sent</span>}
                 {pi.notified_whatsapp && <span className="text-green-600">📱 WA sent</span>}
                 {pi.pi_pdf_path && <FileText className="w-4 h-4 text-gray-500" />}
               </div>
