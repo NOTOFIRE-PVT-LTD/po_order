@@ -41,7 +41,7 @@ export default function LoginPage() {
             <Flame className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900">Notofire</h1>
-          <p className="text-gray-400 text-sm mt-1">PO Management Portal</p>
+          <p className="text-gray-500 text-sm mt-1">PO Management Portal</p>
         </div>
 
         {/* Card */}

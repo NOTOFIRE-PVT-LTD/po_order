@@ -81,7 +81,7 @@ export default function DispatchModule({ order, profile, initialData }: Props) {
         <Card>
           <CardContent className="p-5">
             <div className="flex items-center gap-2 mb-4">
-              <Truck className="w-5 h-5 text-orange-400" />
+              <Truck className="w-5 h-5 text-orange-600" />
               <span className="font-semibold text-gray-900">Dispatch Details</span>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
@@ -89,7 +89,7 @@ export default function DispatchModule({ order, profile, initialData }: Props) {
               <div><span className="text-gray-500">Transporter:</span> <span className="text-gray-700">{dispatch.transporter}</span></div>
               <div><span className="text-gray-500">Date:</span> <span className="text-gray-700">{formatDate(dispatch.dispatch_date)}</span></div>
             </div>
-            {dispatch.notes && <p className="text-sm text-gray-400 mt-3">{dispatch.notes}</p>}
+            {dispatch.notes && <p className="text-sm text-gray-500 mt-3">{dispatch.notes}</p>}
           </CardContent>
         </Card>
       )}
@@ -122,7 +122,7 @@ export default function DispatchModule({ order, profile, initialData }: Props) {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {docs.map((doc, i) => (
                     <div key={doc.type} className="space-y-1.5">
-                      <p className="text-xs text-gray-400">{doc.label}</p>
+                      <p className="text-xs text-gray-500">{doc.label}</p>
                       <Dropzone
                         onFileSelect={file => {
                           const next = [...docs]; next[i] = { ...next[i], file }; setDocs(next)
@@ -145,7 +145,7 @@ export default function DispatchModule({ order, profile, initialData }: Props) {
       )}
 
       {!dispatch && !showForm && (
-        <Card><CardContent className="py-12 text-center"><p className="text-gray-400">No dispatch information yet</p></CardContent></Card>
+        <Card><CardContent className="py-12 text-center"><p className="text-gray-500">No dispatch information yet</p></CardContent></Card>
       )}
     </div>
   )

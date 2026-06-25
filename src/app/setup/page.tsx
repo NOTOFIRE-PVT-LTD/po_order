@@ -34,10 +34,10 @@ export default function SetupPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <div className="bg-white border border-gray-200 rounded-xl p-8 w-full max-w-md">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Notofire DB Setup</h1>
-        <p className="text-gray-400 text-sm mb-6">
+        <p className="text-gray-500 text-sm mb-6">
           Enter your Supabase database password to apply the schema.
           Find it in:{' '}
-          <span className="text-orange-400">
+          <span className="text-orange-600">
             Supabase Dashboard → Settings → Database → Connection string
           </span>
         </p>
@@ -46,7 +46,7 @@ export default function SetupPage() {
           <div className="bg-green-900/40 border border-green-700 rounded-lg p-4 text-green-300">
             <p className="font-semibold">Schema applied!</p>
             <p className="text-sm mt-1">{message}</p>
-            <p className="text-sm mt-3 text-gray-400">
+            <p className="text-sm mt-3 text-gray-500">
               Next: go to Supabase Dashboard → Authentication → Users, create an admin user, then update their role:
             </p>
             <code className="block mt-2 text-xs bg-gray-100 rounded p-2 text-orange-300">

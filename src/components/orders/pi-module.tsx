@@ -120,7 +120,7 @@ export default function PIModule({ order, profile, initialData }: Props) {
       )}
 
       {pis.length === 0 && !showForm && (
-        <Card><CardContent className="py-12 text-center"><p className="text-gray-400">No Proforma Invoices yet</p></CardContent></Card>
+        <Card><CardContent className="py-12 text-center"><p className="text-gray-500">No Proforma Invoices yet</p></CardContent></Card>
       )}
 
       {pis.map(pi => (
@@ -129,13 +129,13 @@ export default function PIModule({ order, profile, initialData }: Props) {
             <div className="flex items-start justify-between">
               <div className="space-y-1">
                 <p className="font-semibold text-gray-900">{pi.pi_number}</p>
-                <p className="text-sm text-gray-400">{formatDate(pi.pi_date)}</p>
-                <p className="text-xl font-bold text-blue-400">{formatCurrency(pi.pi_amount)}</p>
+                <p className="text-sm text-gray-500">{formatDate(pi.pi_date)}</p>
+                <p className="text-xl font-bold text-blue-600">{formatCurrency(pi.pi_amount)}</p>
               </div>
               <div className="flex items-center gap-2 text-xs text-gray-500">
-                {pi.notified_email && <span className="text-green-400">✉ Email sent</span>}
-                {pi.notified_whatsapp && <span className="text-green-400">📱 WA sent</span>}
-                {pi.pi_pdf_path && <FileText className="w-4 h-4 text-gray-400" />}
+                {pi.notified_email && <span className="text-green-600">✉ Email sent</span>}
+                {pi.notified_whatsapp && <span className="text-green-600">📱 WA sent</span>}
+                {pi.pi_pdf_path && <FileText className="w-4 h-4 text-gray-500" />}
               </div>
             </div>
           </CardContent>

@@ -56,7 +56,7 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ id
             <TabsTrigger
               key={tab.value}
               value={tab.value}
-              className="data-[state=active]:bg-blue-600 data-[state=active]:text-gray-900 text-gray-400 hover:text-gray-900 rounded-md px-3 py-1.5 text-sm transition-all"
+              className="data-[state=active]:bg-red-600 data-[state=active]:text-white text-gray-500 hover:text-gray-900 rounded-md px-3 py-1.5 text-sm transition-all font-medium"
             >
               {tab.label}
             </TabsTrigger>
@@ -84,11 +84,11 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ id
               </InfoCard>
               {order.notes && (
                 <InfoCard title="Notes">
-                  <p className="text-sm text-gray-300">{order.notes}</p>
+                  <p className="text-sm text-gray-600">{order.notes}</p>
                 </InfoCard>
               )}
               <InfoCard title="Portal Link">
-                <p className="text-xs text-gray-400 break-all font-mono bg-gray-800 p-2 rounded">
+                <p className="text-xs text-gray-100 break-all font-mono bg-gray-800 p-2 rounded select-all">
                   {`${process.env.NEXT_PUBLIC_APP_URL ?? ''}/portal/${order.secure_token}`}
                 </p>
               </InfoCard>
@@ -145,7 +145,7 @@ function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex justify-between items-start gap-4">
       <span className="text-xs text-gray-500 flex-shrink-0">{label}</span>
-      <span className="text-sm text-gray-200 text-right">{value}</span>
+      <span className="text-sm text-gray-700 text-right">{value}</span>
     </div>
   )
 }

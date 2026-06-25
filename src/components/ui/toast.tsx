@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import * as React from 'react'
 import * as ToastPrimitive from '@radix-ui/react-toast'
@@ -49,7 +49,7 @@ const ToastClose = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitive.Close
     ref={ref}
-    className={cn('absolute right-2 top-2 rounded-md p-1 text-gray-400 hover:text-gray-900 transition-colors', className)}
+    className={cn('absolute right-2 top-2 rounded-md p-1 text-gray-500 hover:text-gray-900 transition-colors', className)}
     toast-close=""
     {...props}
   >
@@ -115,10 +115,10 @@ export function useToastState() {
 export function Toaster() {
   const toasts = useToastState()
   const icons: Record<ToastVariant, React.ReactNode> = {
-    default: <Info className="h-5 w-5 text-blue-400" />,
-    success: <CheckCircle className="h-5 w-5 text-green-400" />,
+    default: <Info className="h-5 w-5 text-blue-600" />,
+    success: <CheckCircle className="h-5 w-5 text-green-600" />,
     error: <XCircle className="h-5 w-5 text-red-600" />,
-    warning: <AlertCircle className="h-5 w-5 text-amber-400" />,
+    warning: <AlertCircle className="h-5 w-5 text-amber-600" />,
   }
 
   return (

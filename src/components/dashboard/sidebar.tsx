@@ -60,7 +60,7 @@ export default function Sidebar({ profile }: { profile: Profile }) {
                   'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 group',
                   active
                     ? 'bg-red-600/20 text-red-600 border border-red-600/30'
-                    : 'text-gray-400 hover:text-gray-900 hover:bg-red-50'
+                    : 'text-gray-500 hover:text-gray-900 hover:bg-red-50'
                 )}
               >
                 <item.icon className={cn('w-4 h-4 flex-shrink-0', active ? 'text-red-600' : 'text-gray-500 group-hover:text-gray-600')} />

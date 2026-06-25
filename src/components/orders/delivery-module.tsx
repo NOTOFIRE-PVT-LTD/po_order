@@ -81,14 +81,14 @@ export default function DeliveryModule({ order, profile, initialData }: Props) {
         <Card>
           <CardContent className="p-5">
             <div className="flex items-center gap-2 mb-4">
-              <PackageCheck className="w-5 h-5 text-green-400" />
+              <PackageCheck className="w-5 h-5 text-green-600" />
               <span className="font-semibold text-gray-900">Delivery Confirmed</span>
             </div>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div><span className="text-gray-500">Delivery Date:</span> <span className="text-gray-700">{formatDate(delivery.delivery_date)}</span></div>
               <div><span className="text-gray-500">Received By:</span> <span className="text-gray-700">{delivery.received_by ?? '—'}</span></div>
             </div>
-            {delivery.notes && <p className="text-sm text-gray-400 mt-3">{delivery.notes}</p>}
+            {delivery.notes && <p className="text-sm text-gray-500 mt-3">{delivery.notes}</p>}
           </CardContent>
         </Card>
       )}
@@ -117,7 +117,7 @@ export default function DeliveryModule({ order, profile, initialData }: Props) {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {docs.map((doc, i) => (
                     <div key={doc.type} className="space-y-1.5">
-                      <p className="text-xs text-gray-400">{doc.label}</p>
+                      <p className="text-xs text-gray-500">{doc.label}</p>
                       <Dropzone
                         onFileSelect={file => { const next = [...docs]; next[i] = { ...next[i], file }; setDocs(next) }}
                         accept={{ 'application/pdf': ['.pdf'], 'image/*': ['.jpg', '.jpeg', '.png'] }}
@@ -138,7 +138,7 @@ export default function DeliveryModule({ order, profile, initialData }: Props) {
       )}
 
       {!delivery && !showForm && (
-        <Card><CardContent className="py-12 text-center"><p className="text-gray-400">No delivery information yet</p></CardContent></Card>
+        <Card><CardContent className="py-12 text-center"><p className="text-gray-500">No delivery information yet</p></CardContent></Card>
       )}
     </div>
   )

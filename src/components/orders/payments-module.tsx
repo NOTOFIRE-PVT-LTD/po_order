@@ -92,9 +92,9 @@ export default function PaymentsModule({ order, profile, initialData }: Props) {
         <div>
           <h2 className="text-lg font-semibold text-gray-900">Payments</h2>
           <div className="flex gap-4 mt-1 text-sm">
-            <span className="text-gray-400">PO Value: <span className="text-gray-900 font-medium">{formatCurrency(order.po_value as number)}</span></span>
-            <span className="text-gray-400">Collected: <span className="text-green-400 font-medium">{formatCurrency(totalApproved)}</span></span>
-            <span className="text-gray-400">Outstanding: <span className="text-amber-400 font-medium">{formatCurrency(outstanding)}</span></span>
+            <span className="text-gray-500">PO Value: <span className="text-gray-900 font-medium">{formatCurrency(order.po_value as number)}</span></span>
+            <span className="text-gray-500">Collected: <span className="text-green-600 font-medium">{formatCurrency(totalApproved)}</span></span>
+            <span className="text-gray-500">Outstanding: <span className="text-amber-600 font-medium">{formatCurrency(outstanding)}</span></span>
           </div>
         </div>
         {isStaffOrAdmin && !showForm && (
@@ -153,7 +153,7 @@ export default function PaymentsModule({ order, profile, initialData }: Props) {
       )}
 
       {payments.length === 0 && !showForm && (
-        <Card><CardContent className="py-12 text-center"><p className="text-gray-400">No payment requests yet</p></CardContent></Card>
+        <Card><CardContent className="py-12 text-center"><p className="text-gray-500">No payment requests yet</p></CardContent></Card>
       )}
 
       {payments.map(payment => (
@@ -166,10 +166,10 @@ export default function PaymentsModule({ order, profile, initialData }: Props) {
                   <PaymentStatusBadge status={payment.status} />
                   <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded capitalize">{payment.payment_type}</span>
                 </div>
-                <p className="text-sm text-gray-400">Due: {formatDate(payment.due_date)}</p>
-                {payment.utr_number && <p className="text-sm text-gray-600">UTR: <span className="font-mono text-blue-400">{payment.utr_number}</span></p>}
+                <p className="text-sm text-gray-500">Due: {formatDate(payment.due_date)}</p>
+                {payment.utr_number && <p className="text-sm text-gray-600">UTR: <span className="font-mono text-blue-600">{payment.utr_number}</span></p>}
                 {payment.outstanding_balance !== null && payment.outstanding_balance !== undefined && (
-                  <p className="text-sm text-gray-400">Outstanding after: {formatCurrency(payment.outstanding_balance)}</p>
+                  <p className="text-sm text-gray-500">Outstanding after: {formatCurrency(payment.outstanding_balance)}</p>
                 )}
                 {payment.rejection_reason && (
                   <p className="text-sm text-red-600">Rejected: {payment.rejection_reason}</p>
@@ -187,7 +187,7 @@ export default function PaymentsModule({ order, profile, initialData }: Props) {
                 </div>
               )}
               {payment.status === 'pending' && (
-                <span className="flex items-center gap-1 text-xs text-amber-400"><Clock className="w-3.5 h-3.5" />Awaiting customer payment</span>
+                <span className="flex items-center gap-1 text-xs text-amber-600"><Clock className="w-3.5 h-3.5" />Awaiting customer payment</span>
               )}
             </div>
           </CardContent>

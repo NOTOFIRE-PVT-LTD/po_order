@@ -67,7 +67,7 @@ function Section({ title, icon: Icon, defaultOpen = true, children }: {
           <Icon className="w-5 h-5 text-red-600" />
           <span className="font-semibold text-gray-900">{title}</span>
         </div>
-        {open ? <ChevronUp className="w-4 h-4 text-gray-400" /> : <ChevronDown className="w-4 h-4 text-gray-400" />}
+        {open ? <ChevronUp className="w-4 h-4 text-gray-500" /> : <ChevronDown className="w-4 h-4 text-gray-500" />}
       </button>
       {open && <div className="px-5 pb-5">{children}</div>}
     </div>
@@ -238,9 +238,9 @@ export default function CustomerPortalClient({ token }: { token: string }) {
               return (
                 <div key={step.key} className="flex flex-col items-center z-10 flex-1">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all ${done ? 'bg-red-600 border-red-500 shadow-lg shadow-red-500/30' : 'bg-gray-100 border-gray-300'} ${current ? 'ring-2 ring-red-400 ring-offset-2 ring-offset-gray-50' : ''}`}>
-                    {done ? <CheckCircle2 className="w-4 h-4 text-white" /> : <Circle className="w-4 h-4 text-gray-400" />}
+                    {done ? <CheckCircle2 className="w-4 h-4 text-white" /> : <Circle className="w-4 h-4 text-gray-500" />}
                   </div>
-                  <p className={`text-xs mt-2 text-center font-medium ${done ? 'text-red-600' : 'text-gray-400'}`}>{step.label}</p>
+                  <p className={`text-xs mt-2 text-center font-medium ${done ? 'text-red-600' : 'text-gray-500'}`}>{step.label}</p>
                 </div>
               )
             })}
@@ -373,7 +373,7 @@ export default function CustomerPortalClient({ token }: { token: string }) {
                   <div className="pb-3">
                     <p className="font-medium text-gray-900 text-sm">{PRODUCTION_STATUS_LABELS[update.status as ProductionStatus] ?? update.status}</p>
                     {update.notes && <p className="text-xs text-gray-500">{update.notes}</p>}
-                    <p className="text-xs text-gray-400 mt-0.5">{formatDateTime(update.created_at)}</p>
+                    <p className="text-xs text-gray-500 mt-0.5">{formatDateTime(update.created_at)}</p>
                   </div>
                 </div>
               ))}
@@ -451,7 +451,7 @@ export default function CustomerPortalClient({ token }: { token: string }) {
             {/* Messages */}
             <div className="max-h-80 overflow-y-auto space-y-3 pr-1">
               {comments.length === 0 && (
-                <p className="text-center text-gray-400 text-sm py-4">No messages yet</p>
+                <p className="text-center text-gray-500 text-sm py-4">No messages yet</p>
               )}
               {comments.map(c => {
                 const isCustomer = c.author_role === 'customer'
@@ -465,7 +465,7 @@ export default function CustomerPortalClient({ token }: { token: string }) {
                       <div className={`rounded-2xl px-3.5 py-2 text-sm ${isCustomer ? 'bg-red-600 text-white rounded-tr-sm' : 'bg-gray-100 text-gray-800 rounded-tl-sm'}`}>
                         {c.content}
                       </div>
-                      <span className={`text-xs text-gray-400 ${isCustomer ? 'text-right' : ''}`}>{formatDateTime(c.created_at)}</span>
+                      <span className={`text-xs text-gray-500 ${isCustomer ? 'text-right' : ''}`}>{formatDateTime(c.created_at)}</span>
                     </div>
                   </div>
                 )
@@ -508,7 +508,7 @@ export default function CustomerPortalClient({ token }: { token: string }) {
             </div>
             <span className="text-sm font-semibold text-gray-900">Notofire</span>
           </div>
-          <p className="text-xs text-gray-400">This portal is unique to your order. Do not share this link.</p>
+          <p className="text-xs text-gray-500">This portal is unique to your order. Do not share this link.</p>
         </div>
       </div>
     </div>
@@ -568,7 +568,7 @@ function PortalError({ error }: { error: string }) {
         </div>
         <h1 className="text-xl font-bold text-gray-900 mb-2">Order Not Found</h1>
         <p className="text-gray-500 text-sm">{error}</p>
-        <p className="text-gray-400 text-xs mt-4">If you believe this is an error, please contact your supplier.</p>
+        <p className="text-gray-500 text-xs mt-4">If you believe this is an error, please contact your supplier.</p>
       </div>
     </div>
   )

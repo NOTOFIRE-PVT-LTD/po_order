@@ -92,15 +92,15 @@ export default function InspectionModule({ order, profile, initialData }: Props)
         <Card>
           <CardContent className="p-5">
             <div className="flex items-center gap-2 mb-4">
-              <FlaskConical className="w-5 h-5 text-cyan-400" />
+              <FlaskConical className="w-5 h-5 text-cyan-700" />
               <span className="font-semibold text-gray-900">Inspection Details</span>
             </div>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div><span className="text-gray-500">Date:</span> <span className="text-gray-700">{formatDate(inspection.inspection_date)}</span></div>
               <div><span className="text-gray-500">Inspector:</span> <span className="text-gray-700">{inspection.inspector_name ?? '—'}</span></div>
-              <div><span className="text-gray-500">Result:</span> <span className={`font-medium ${inspection.result === 'passed' ? 'text-green-400' : inspection.result === 'failed' ? 'text-red-600' : 'text-gray-700'}`}>{inspection.result ?? '—'}</span></div>
+              <div><span className="text-gray-500">Result:</span> <span className={`font-medium ${inspection.result === 'passed' ? 'text-green-600' : inspection.result === 'failed' ? 'text-red-600' : 'text-gray-700'}`}>{inspection.result ?? '—'}</span></div>
             </div>
-            {inspection.notes && <p className="text-sm text-gray-400 mt-3">{inspection.notes}</p>}
+            {inspection.notes && <p className="text-sm text-gray-500 mt-3">{inspection.notes}</p>}
           </CardContent>
         </Card>
       )}
@@ -133,7 +133,7 @@ export default function InspectionModule({ order, profile, initialData }: Props)
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {uploadFiles.map((u, i) => (
                     <div key={u.type} className="space-y-1.5">
-                      <p className="text-xs text-gray-400">{docLabels[u.type]}</p>
+                      <p className="text-xs text-gray-500">{docLabels[u.type]}</p>
                       <Dropzone
                         onFileSelect={file => {
                           const next = [...uploadFiles]
@@ -158,7 +158,7 @@ export default function InspectionModule({ order, profile, initialData }: Props)
       )}
 
       {!inspection && !showForm && (
-        <Card><CardContent className="py-12 text-center"><p className="text-gray-400">No inspection data yet</p></CardContent></Card>
+        <Card><CardContent className="py-12 text-center"><p className="text-gray-500">No inspection data yet</p></CardContent></Card>
       )}
     </div>
   )

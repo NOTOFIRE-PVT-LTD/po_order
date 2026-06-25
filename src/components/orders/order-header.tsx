@@ -36,7 +36,7 @@ export default function OrderHeader({ order, profile }: { order: Record<string, 
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
-        <Link href="/dashboard/orders" className="text-gray-400 hover:text-gray-900 transition-colors">
+        <Link href="/dashboard/orders" className="text-gray-500 hover:text-gray-900 transition-colors">
           <ChevronLeft className="w-5 h-5" />
         </Link>
         <span className="text-gray-600">/</span>
@@ -51,7 +51,7 @@ export default function OrderHeader({ order, profile }: { order: Record<string, 
             <h1 className="text-2xl font-bold text-gray-900">{order.po_number as string}</h1>
             <POStatusBadge status={order.status as 'draft'} />
           </div>
-          <p className="text-gray-400 mt-1">{order.customer_name as string} • {formatCurrency(order.po_value as number)}</p>
+          <p className="text-gray-500 mt-1">{order.customer_name as string} • {formatCurrency(order.po_value as number)}</p>
         </div>
 
         <div className="flex items-center gap-2">

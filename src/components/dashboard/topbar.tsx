@@ -49,7 +49,7 @@ export default function TopBar({ profile }: { profile: Profile }) {
       <header className="flex items-center justify-between px-4 md:px-6 h-16 border-b border-gray-200 bg-[#ffffff]/90 backdrop-blur-sm flex-shrink-0">
         {/* Mobile menu toggle */}
         <button
-          className="md:hidden text-gray-400 hover:text-gray-900"
+          className="md:hidden text-gray-500 hover:text-gray-900"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           <Menu className="w-5 h-5" />
@@ -57,7 +57,7 @@ export default function TopBar({ profile }: { profile: Profile }) {
 
         {/* Page breadcrumb / title */}
         <div className="hidden md:block">
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-500">
             Welcome back, <span className="text-gray-900 font-medium">{profile.full_name}</span>
           </p>
         </div>
@@ -93,7 +93,7 @@ export default function TopBar({ profile }: { profile: Profile }) {
                     onClick={() => setMobileOpen(false)}
                     className={cn(
                       'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all',
-                      active ? 'bg-red-600/20 text-red-600' : 'text-gray-400 hover:text-gray-900 hover:bg-red-50'
+                      active ? 'bg-red-600/20 text-red-600' : 'text-gray-500 hover:text-gray-900 hover:bg-red-50'
                     )}
                   >
                     <item.icon className="w-4 h-4" />
@@ -103,7 +103,7 @@ export default function TopBar({ profile }: { profile: Profile }) {
               })}
             </nav>
             <div className="px-4 py-4 border-t border-gray-200">
-              <button onClick={handleLogout} className="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-900">
+              <button onClick={handleLogout} className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900">
                 <LogOut className="w-4 h-4" />
                 Sign out
               </button>

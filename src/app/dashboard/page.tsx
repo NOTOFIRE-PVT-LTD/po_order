@@ -44,19 +44,19 @@ export default async function DashboardPage() {
   }
 
   const statCards = [
-    { label: 'Total Orders', value: stats.total, icon: ShoppingBag, color: 'text-blue-400', bg: 'bg-blue-900/30 border-blue-800/50' },
-    { label: 'Pending Payments', value: stats.payment_pending, icon: CreditCard, color: 'text-amber-400', bg: 'bg-amber-900/30 border-amber-800/50' },
-    { label: 'In Production', value: stats.in_production, icon: Factory, color: 'text-purple-400', bg: 'bg-purple-900/30 border-purple-800/50' },
-    { label: 'In Inspection', value: stats.in_inspection, icon: FlaskConical, color: 'text-cyan-400', bg: 'bg-cyan-900/30 border-cyan-800/50' },
-    { label: 'Dispatched', value: stats.dispatched, icon: Truck, color: 'text-orange-400', bg: 'bg-orange-900/30 border-orange-800/50' },
-    { label: 'Delivered', value: stats.delivered, icon: PackageCheck, color: 'text-green-400', bg: 'bg-green-900/30 border-green-800/50' },
+    { label: 'Total Orders', value: stats.total, icon: ShoppingBag, color: 'text-blue-600', bg: 'bg-blue-900/30 border-blue-800/50' },
+    { label: 'Pending Payments', value: stats.payment_pending, icon: CreditCard, color: 'text-amber-600', bg: 'bg-amber-900/30 border-amber-800/50' },
+    { label: 'In Production', value: stats.in_production, icon: Factory, color: 'text-purple-600', bg: 'bg-purple-900/30 border-purple-800/50' },
+    { label: 'In Inspection', value: stats.in_inspection, icon: FlaskConical, color: 'text-cyan-700', bg: 'bg-cyan-900/30 border-cyan-800/50' },
+    { label: 'Dispatched', value: stats.dispatched, icon: Truck, color: 'text-orange-600', bg: 'bg-orange-900/30 border-orange-800/50' },
+    { label: 'Delivered', value: stats.delivered, icon: PackageCheck, color: 'text-green-600', bg: 'bg-green-900/30 border-green-800/50' },
   ]
 
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-400 text-sm mt-1">Overview of all purchase orders</p>
+        <p className="text-gray-500 text-sm mt-1">Overview of all purchase orders</p>
       </div>
 
       {/* Stat Cards */}
@@ -67,7 +67,7 @@ export default async function DashboardPage() {
               <stat.icon className={`w-5 h-5 ${stat.color}`} />
             </div>
             <p className={`text-3xl font-bold ${stat.color}`}>{stat.value}</p>
-            <p className="text-xs text-gray-400 mt-1">{stat.label}</p>
+            <p className="text-xs text-gray-500 mt-1">{stat.label}</p>
           </div>
         ))}
       </div>
@@ -79,7 +79,7 @@ export default async function DashboardPage() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>Recent Orders</CardTitle>
-                <Link href="/dashboard/orders" className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1">
+                <Link href="/dashboard/orders" className="text-xs text-blue-600 hover:text-blue-300 flex items-center gap-1">
                   View all <ArrowRight className="w-3 h-3" />
                 </Link>
               </div>
@@ -93,7 +93,7 @@ export default async function DashboardPage() {
                     className="flex items-center justify-between py-3 hover:bg-gray-100/50 -mx-2 px-2 rounded-lg transition-colors group"
                   >
                     <div className="min-w-0">
-                      <p className="text-sm font-medium text-gray-900 group-hover:text-blue-400 transition-colors">{order.po_number}</p>
+                      <p className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">{order.po_number}</p>
                       <p className="text-xs text-gray-500 truncate">{order.customer_name}</p>
                     </div>
                     <div className="flex items-center gap-3 flex-shrink-0">
@@ -127,8 +127,8 @@ export default async function DashboardPage() {
                       className="block p-3 rounded-lg bg-amber-900/20 border border-amber-800/40 hover:border-amber-700/60 transition-colors"
                     >
                       <p className="text-sm font-medium text-gray-900">{po?.po_number}</p>
-                      <p className="text-xs text-gray-400">{po?.customer_name}</p>
-                      <p className="text-sm text-amber-400 font-semibold mt-1">{formatCurrency(payment.amount_requested)}</p>
+                      <p className="text-xs text-gray-500">{po?.customer_name}</p>
+                      <p className="text-sm text-amber-600 font-semibold mt-1">{formatCurrency(payment.amount_requested)}</p>
                     </Link>
                   )
                 })}

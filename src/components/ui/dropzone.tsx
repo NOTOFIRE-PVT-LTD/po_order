@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useCallback, useState } from 'react'
 import { useDropzone, type Accept } from 'react-dropzone'
@@ -68,15 +68,15 @@ export function Dropzone({
             {isPDF ? (
               <FileText className="h-10 w-10 text-red-600" />
             ) : (
-              <Image className="h-10 w-10 text-blue-400" />
+              <Image className="h-10 w-10 text-blue-600" />
             )}
             <p className="text-sm font-medium text-gray-700">{activeFile.name}</p>
-            <p className="text-xs text-green-400">File selected — click to change</p>
+            <p className="text-xs text-green-600">File selected — click to change</p>
           </div>
         ) : (
           <div className="flex flex-col items-center gap-3">
             <div className="rounded-full bg-gray-100 p-3">
-              <Upload className="h-6 w-6 text-gray-400" />
+              <Upload className="h-6 w-6 text-gray-500" />
             </div>
             <div>
               <p className="text-sm font-medium text-gray-700">{isDragActive ? 'Drop file here' : label}</p>

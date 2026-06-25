@@ -127,7 +127,7 @@ export default function DocumentsModule({ order, profile, initialData }: Props) 
       )}
 
       {docs.length === 0 && !showForm && (
-        <Card><CardContent className="py-12 text-center"><p className="text-gray-400">No documents uploaded yet</p></CardContent></Card>
+        <Card><CardContent className="py-12 text-center"><p className="text-gray-500">No documents uploaded yet</p></CardContent></Card>
       )}
 
       {Object.entries(grouped).map(([type, typeDocs]) => (
@@ -139,7 +139,7 @@ export default function DocumentsModule({ order, profile, initialData }: Props) 
             {typeDocs.map(doc => (
               <div key={doc.id} className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-white hover:bg-gray-100/50 transition-colors">
                 <div className="flex items-center gap-3 min-w-0">
-                  <FileText className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <FileText className="w-4 h-4 text-blue-600 flex-shrink-0" />
                   <div className="min-w-0">
                     <p className="text-sm text-gray-700 font-medium truncate">{doc.file_name}</p>
                     <p className="text-xs text-gray-500">

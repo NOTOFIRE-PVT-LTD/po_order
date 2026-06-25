@@ -67,7 +67,7 @@ export default function ProductionModule({ order, profile, initialData }: Props)
           const done = latestStatuses.has(status)
           return (
             <div key={status} className={`p-3 rounded-lg border text-center transition-colors ${done ? 'border-green-700 bg-green-900/20' : 'border-gray-200 bg-white/30'}`}>
-              {done ? <CheckCircle2 className="w-5 h-5 text-green-400 mx-auto mb-1" /> : <Circle className="w-5 h-5 text-gray-600 mx-auto mb-1" />}
+              {done ? <CheckCircle2 className="w-5 h-5 text-green-600 mx-auto mb-1" /> : <Circle className="w-5 h-5 text-gray-600 mx-auto mb-1" />}
               <p className="text-xs text-gray-600 font-medium">{PRODUCTION_STATUS_LABELS[status]}</p>
             </div>
           )
@@ -112,7 +112,7 @@ export default function ProductionModule({ order, profile, initialData }: Props)
 
       {/* Timeline */}
       {updates.length === 0 && !showForm && (
-        <Card><CardContent className="py-12 text-center"><p className="text-gray-400">No production updates yet</p></CardContent></Card>
+        <Card><CardContent className="py-12 text-center"><p className="text-gray-500">No production updates yet</p></CardContent></Card>
       )}
 
       <div className="space-y-3">
@@ -120,13 +120,13 @@ export default function ProductionModule({ order, profile, initialData }: Props)
           <div key={update.id} className="flex gap-3">
             <div className="flex flex-col items-center">
               <div className="w-8 h-8 rounded-full bg-green-900/50 border border-green-700 flex items-center justify-center flex-shrink-0">
-                <CheckCircle2 className="w-4 h-4 text-green-400" />
+                <CheckCircle2 className="w-4 h-4 text-green-600" />
               </div>
               {i < updates.length - 1 && <div className="w-0.5 bg-gray-200 flex-1 mt-2" />}
             </div>
             <div className="pb-4 flex-1">
               <p className="font-medium text-gray-900">{PRODUCTION_STATUS_LABELS[update.status as keyof typeof PRODUCTION_STATUS_LABELS] ?? update.status}</p>
-              {update.notes && <p className="text-sm text-gray-400 mt-0.5">{update.notes}</p>}
+              {update.notes && <p className="text-sm text-gray-500 mt-0.5">{update.notes}</p>}
               <p className="text-xs text-gray-600 mt-1">{formatDateTime(update.created_at)}</p>
             </div>
           </div>

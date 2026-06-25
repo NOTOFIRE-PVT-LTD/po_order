@@ -50,7 +50,7 @@ export default function OrdersPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Purchase Orders</h1>
-          <p className="text-gray-400 text-sm mt-1">{total} orders total</p>
+          <p className="text-gray-500 text-sm mt-1">{total} orders total</p>
         </div>
         <Button onClick={() => setShowCreate(true)}>
           <Plus className="w-4 h-4" />
@@ -81,7 +81,7 @@ export default function OrdersPage() {
             </div>
           ) : orders.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-gray-400">No orders found</p>
+              <p className="text-gray-500">No orders found</p>
               <Button onClick={() => setShowCreate(true)} className="mt-4" variant="outline">
                 Create your first PO
               </Button>
@@ -91,19 +91,19 @@ export default function OrdersPage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200">
-                    <th className="text-left px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">PO Number</th>
-                    <th className="text-left px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider hidden md:table-cell">Customer</th>
-                    <th className="text-left px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider hidden lg:table-cell">Value</th>
-                    <th className="text-left px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
-                    <th className="text-left px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider hidden xl:table-cell">Created</th>
-                    <th className="text-right px-6 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">Actions</th>
+                    <th className="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">PO Number</th>
+                    <th className="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Customer</th>
+                    <th className="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">Value</th>
+                    <th className="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                    <th className="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider hidden xl:table-cell">Created</th>
+                    <th className="text-right px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-800/50">
                   {orders.map(order => (
                     <tr key={order.id} className="hover:bg-gray-100/50 transition-colors group">
                       <td className="px-6 py-4">
-                        <Link href={`/dashboard/orders/${order.id}`} className="font-semibold text-blue-400 hover:text-blue-300">
+                        <Link href={`/dashboard/orders/${order.id}`} className="font-semibold text-blue-600 hover:text-blue-300">
                           {order.po_number}
                         </Link>
                       </td>
@@ -156,7 +156,7 @@ export default function OrdersPage() {
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex items-center justify-between">
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-500">
             Showing {(page - 1) * limit + 1}–{Math.min(page * limit, total)} of {total}
           </p>
           <div className="flex items-center gap-2">

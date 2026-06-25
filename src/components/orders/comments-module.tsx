@@ -134,7 +134,7 @@ export default function CommentsModule({ order, profile, initialData }: Props) {
             <div className="flex items-center justify-between">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={isInternal} onChange={e => setIsInternal(e.target.checked)} className="w-4 h-4 rounded" />
-                <span className="text-xs text-gray-400">Internal note (hidden from customer)</span>
+                <span className="text-xs text-gray-500">Internal note (hidden from customer)</span>
               </label>
               <Button type="submit" size="sm" loading={loading} disabled={!content.trim()}>
                 <Send className="w-3.5 h-3.5" />
