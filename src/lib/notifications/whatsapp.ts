@@ -1,70 +1,33 @@
-const WA_API_URL = process.env.WHATSAPP_API_URL
-const PHONE_NUMBER_ID = process.env.WHATSAPP_PHONE_NUMBER_ID
-const ACCESS_TOKEN = process.env.WHATSAPP_ACCESS_TOKEN
-
-function formatCurrency(amount: number) {
-  return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount)
-}
+const AISENSY_API_KEY = process.env.AISENSY_API_KEY
+const AISENSY_API_URL = 'https://backend.aisensy.com/campaign/t1/api/v2'
 
 function sanitizePhone(phone: string): string {
-  // Remove spaces, dashes, parentheses; ensure country code
   const digits = phone.replace(/\D/g, '')
   if (digits.startsWith('0')) return '91' + digits.slice(1)
   if (digits.length === 10) return '91' + digits
   return digits
 }
 
-async function sendWhatsAppMessage(to: string, body: string) {
-  const phone = sanitizePhone(to)
-
-  const response = await fetch(`${WA_API_URL}/${PHONE_NUMBER_ID}/messages`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      messaging_product: 'whatsapp',
-      recipient_type: 'individual',
-      to: phone,
-      type: 'text',
-      text: { preview_url: true, body },
-    }),
-  })
-
-  if (!response.ok) {
-    const err = await response.json()
-    throw new Error(`WhatsApp API error: ${JSON.stringify(err)}`)
-  }
-
-  return await response.json()
+interface AiSensyPayload {
+  apiKey: string
+  campaignName: string
+  destination: string
+  userName: string
+  templateParams?: string[]
+  media?: { url: string; filename: string }
+  source?: string
 }
 
-async function sendWhatsAppTemplate(to: string, templateName: string, languageCode: string, components: object[]) {
-  const phone = sanitizePhone(to)
-
-  const response = await fetch(`${WA_API_URL}/${PHONE_NUMBER_ID}/messages`, {
+async function sendAiSensyMessage(payload: AiSensyPayload) {
+  const response = await fetch(AISENSY_API_URL, {
     method: 'POST',
-    headers: {
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      messaging_product: 'whatsapp',
-      recipient_type: 'individual',
-      to: phone,
-      type: 'template',
-      template: {
-        name: templateName,
-        language: { code: languageCode },
-        components,
-      },
-    }),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
   })
 
   if (!response.ok) {
-    const err = await response.json()
-    throw new Error(`WhatsApp API error: ${JSON.stringify(err)}`)
+    const err = await response.json().catch(() => response.text())
+    throw new Error(`AiSensy API error: ${JSON.stringify(err)}`)
   }
 
   return await response.json()
@@ -79,36 +42,23 @@ export async function sendPIWhatsApp(params: {
   portalLink: string
   piPdfUrl?: string | null
 }) {
-  const components: object[] = []
-
-  // Header: attach PI document if available
-  if (params.piPdfUrl) {
-    components.push({
-      type: 'header',
-      parameters: [
-        {
-          type: 'document',
-          document: {
-            link: params.piPdfUrl,
-            filename: `${params.piNumber}.pdf`,
-          },
-        },
-      ],
-    })
+  const payload: AiSensyPayload = {
+    apiKey: AISENSY_API_KEY!,
+    campaignName: 'pi_tracking_flow',
+    destination: sanitizePhone(params.mobile),
+    userName: params.customerName,
+    templateParams: [params.portalLink],
+    source: 'po-portal',
   }
 
-  // Body: tracking link variable
-  components.push({
-    type: 'body',
-    parameters: [
-      {
-        type: 'text',
-        text: params.portalLink,
-      },
-    ],
-  })
+  if (params.piPdfUrl) {
+    payload.media = {
+      url: params.piPdfUrl,
+      filename: `${params.piNumber}.pdf`,
+    }
+  }
 
-  return await sendWhatsAppTemplate(params.mobile, 'pi_tracking', 'en', components)
+  return await sendAiSensyMessage(payload)
 }
 
 export async function sendPaymentRequestWhatsApp(params: {
@@ -121,22 +71,21 @@ export async function sendPaymentRequestWhatsApp(params: {
   upiLink: string | null
   portalLink: string
 }) {
-  const upiText = params.upiLink ? `\n💳 *UPI Link:* ${params.upiLink}` : ''
-  const message = `💰 *Notofire - Payment Request*
-
-Dear ${params.customerName},
-
-A payment request has been raised.
-
-📋 *PO:* ${params.poNumber}
-💵 *Amount:* ${formatCurrency(params.amountRequested)}
-📌 *Type:* ${params.paymentType}
-📅 *Due Date:* ${params.dueDate}${upiText}
-
-Upload payment proof here:
-${params.portalLink}`
-
-  return await sendWhatsAppMessage(params.mobile, message)
+  return await sendAiSensyMessage({
+    apiKey: AISENSY_API_KEY!,
+    campaignName: 'payment_request_flow',
+    destination: sanitizePhone(params.mobile),
+    userName: params.customerName,
+    templateParams: [
+      params.poNumber,
+      new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(params.amountRequested),
+      params.paymentType,
+      params.dueDate,
+      params.upiLink ?? '',
+      params.portalLink,
+    ],
+    source: 'po-portal',
+  })
 }
 
 export async function sendPaymentApprovedWhatsApp(params: {
@@ -147,23 +96,21 @@ export async function sendPaymentApprovedWhatsApp(params: {
   outstandingBalance: number | null
   portalLink: string
 }) {
-  const balanceText = params.outstandingBalance && params.outstandingBalance > 0
-    ? `\n⚠️ *Outstanding:* ${formatCurrency(params.outstandingBalance)}`
-    : '\n✅ All payments cleared!'
-
-  const message = `✅ *Notofire - Payment Approved*
-
-Dear ${params.customerName},
-
-Your payment has been verified.
-
-📋 *PO:* ${params.poNumber}
-💰 *Amount:* ${formatCurrency(params.amountRequested)}${balanceText}
-
-Track your order:
-${params.portalLink}`
-
-  return await sendWhatsAppMessage(params.mobile, message)
+  return await sendAiSensyMessage({
+    apiKey: AISENSY_API_KEY!,
+    campaignName: 'payment_approved_flow',
+    destination: sanitizePhone(params.mobile),
+    userName: params.customerName,
+    templateParams: [
+      params.poNumber,
+      new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(params.amountRequested),
+      params.outstandingBalance && params.outstandingBalance > 0
+        ? new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(params.outstandingBalance)
+        : '0',
+      params.portalLink,
+    ],
+    source: 'po-portal',
+  })
 }
 
 export async function sendDispatchWhatsApp(params: {
@@ -175,21 +122,20 @@ export async function sendDispatchWhatsApp(params: {
   dispatchDate: string
   portalLink: string
 }) {
-  const message = `🚛 *Notofire - Order Dispatched!*
-
-Dear ${params.customerName},
-
-Your order has been dispatched.
-
-📋 *PO:* ${params.poNumber}
-🚚 *Transporter:* ${params.transporter}
-🔢 *Vehicle No:* ${params.vehicleNumber}
-📅 *Dispatch Date:* ${params.dispatchDate}
-
-Track your order and download documents:
-${params.portalLink}`
-
-  return await sendWhatsAppMessage(params.mobile, message)
+  return await sendAiSensyMessage({
+    apiKey: AISENSY_API_KEY!,
+    campaignName: 'dispatch_notification_flow',
+    destination: sanitizePhone(params.mobile),
+    userName: params.customerName,
+    templateParams: [
+      params.poNumber,
+      params.transporter,
+      params.vehicleNumber,
+      params.dispatchDate,
+      params.portalLink,
+    ],
+    source: 'po-portal',
+  })
 }
 
 export async function sendProductionUpdateWhatsApp(params: {
@@ -199,16 +145,12 @@ export async function sendProductionUpdateWhatsApp(params: {
   status: string
   portalLink: string
 }) {
-  const message = `🏭 *Notofire - Production Update*
-
-Dear ${params.customerName},
-
-Order update for PO ${params.poNumber}:
-
-📌 *Status:* ${params.status}
-
-View full timeline:
-${params.portalLink}`
-
-  return await sendWhatsAppMessage(params.mobile, message)
+  return await sendAiSensyMessage({
+    apiKey: AISENSY_API_KEY!,
+    campaignName: 'production_update_flow',
+    destination: sanitizePhone(params.mobile),
+    userName: params.customerName,
+    templateParams: [params.poNumber, params.status, params.portalLink],
+    source: 'po-portal',
+  })
 }
