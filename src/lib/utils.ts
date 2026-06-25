@@ -33,8 +33,14 @@ export function formatDateTime(date: string | null | undefined) {
   })
 }
 
+function getAppUrl() {
+  // Vercel sets VERCEL_URL automatically on every deployment (no https://)
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
+  return 'http://localhost:3000'
+}
+
 export function getPortalLink(token: string) {
-  return `${process.env.NEXT_PUBLIC_APP_URL}/portal/${token}`
+  return `${getAppUrl()}/portal/${token}`
 }
 
 export function truncate(str: string, length: number) {
