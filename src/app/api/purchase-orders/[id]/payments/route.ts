@@ -75,6 +75,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
         dueDate: due_date,
         upiLink: upi_link ?? null,
         portalLink,
+        notes: notes ?? null,
       })
     } catch (err) { console.error('WhatsApp failed:', err) }
   }

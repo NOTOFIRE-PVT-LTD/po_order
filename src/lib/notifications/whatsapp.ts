@@ -70,18 +70,18 @@ export async function sendPaymentRequestWhatsApp(params: {
   dueDate: string
   upiLink: string | null
   portalLink: string
+  notes?: string | null
 }) {
   return await sendAiSensyMessage({
     apiKey: AISENSY_API_KEY!,
-    campaignName: 'payment_request_flow',
+    campaignName: 'payment_requested',
     destination: sanitizePhone(params.mobile),
     userName: params.customerName,
     templateParams: [
-      params.poNumber,
       new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(params.amountRequested),
       params.paymentType,
       params.dueDate,
-      params.upiLink ?? '',
+      params.notes ?? '-',
       params.portalLink,
     ],
     source: 'po-portal',
